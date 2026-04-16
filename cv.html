@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lebenslauf erstellen — Jobbrücke</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #1e5f6a;
+            --ink: #1a1a1a;
+            --soft: #4a4a4a;
+            --muted: #8a8a8a;
+            --line: #e5e5e5;
+            --paper: #ffffff;
+            --bg: #f8f6f3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+        }
+
+        /* Top bar */
+        .topbar {
+            background: var(--paper);
+            border-bottom: 1px solid var(--line);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .topbar-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-ghost {
+            color: var(--soft);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-primary:hover {
+            background: #145055;
+            transform: translateY(-1px);
+        }
+
+        /* Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Form side */
+        .form-panel {
+            padding: 2.5rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 70px);
+            border-right: 1px solid var(--line);
+        }
+
+        .panel-header {
+            margin-bottom: 2rem;
+        }
+
+        .panel-title {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .panel-subtitle {
+            color: var(--soft);
+            font-size: 0.95rem;
+        }
+
+        /* Form sections */
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--ink);
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.75rem;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--soft);
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            color: var(--ink);
+            background: #fafafa;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--accent);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(30, 95, 106, 0.1);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Dynamic items (experience, education) */
+        .dynamic-item {
+            background: #fafafa;
+            border: 1px dashed var(--line);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .dynamic-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .dynamic-item-title {
+            font-family: 'Fraunces', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .btn-remove {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-remove:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 0.7rem;
+            background: transparent;
+            border: 1px dashed var(--accent);
+            border-radius: 10px;
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-add:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Color picker */
+        .color-picker {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            outline: 1px solid var(--line);
+            transition: all 0.2s;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch.active {
+            outline: 2px solid var(--ink);
+            outline-offset: 2px;
+            transform: scale(1.1);
+        }
+
+        /* Photo upload */
+        .photo-upload {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .photo-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--line);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            border: 2px solid white;
+            outline: 1px solid var(--line);
+        }
+
+        .photo-upload-btn {
+            padding: 0.6rem 1rem;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            color: var(--soft);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .photo-upload-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Preview side */
+        .preview-panel {
+            padding: 2rem;
+            background: var(--bg);
+            overflow-y: auto;
+            max-height: calc(100vh - 70px);
+        }
+
+        .preview-placeholder {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--muted);
+        }
+
+        .preview-placeholder h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--soft);
+        }
+
+        @media (max-width: 968px) {
+            .container { grid-template-columns: 1fr; }
+            .form-panel { border-right: none; max-height: none; }
+            .preview-panel { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="topbar">
+    <a href="index.html" class="logo">Jobbrücke</a>
+    <div class="topbar-actions">
+        <a href="index.html" class="btn-ghost">← Zurück</a>
+        <button class="btn-primary" onclick="alert('PDF-Download folgt im nächsten Schritt!')">📄 PDF herunterladen</button>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- FORM PANEL -->
+    <div class="form-panel">
+        <div class="panel-header">
+            <h1 class="panel-title">Dein Lebenslauf</h1>
+            <p class="panel-subtitle">Fülle die Felder aus — deine Daten bleiben in deinem Browser.</p>
+        </div>
+
+        <!-- Design -->
+        <div class="section">
+            <div class="section-title">Design</div>
+            <div class="form-group">
+                <label>Akzentfarbe</label>
+                <div class="color-picker">
+                    <div class="color-swatch active" style="background:#1e5f6a" data-color="#1e5f6a"></div>
+                    <div class="color-swatch" style="background:#1a3a5c" data-color="#1a3a5c"></div>
+                    <div class="color-swatch" style="background:#2d5f3f" data-color="#2d5f3f"></div>
+                    <div class="color-swatch" style="background:#8b3a3a" data-color="#8b3a3a"></div>
+                    <div class="color-swatch" style="background:#5c2e8f" data-color="#5c2e8f"></div>
+                    <div class="color-swatch" style="background:#b8862f" data-color="#b8862f"></div>
+                    <div class="color-swatch" style="background:#1a1a1a" data-color="#1a1a1a"></div>
+                    <div class="color-swatch" style="background:#c84a2a" data-color="#c84a2a"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Info -->
+        <div class="section">
+            <div class="section-title">Persönliche Daten</div>
+            
+            <div class="photo-upload">
+                <div class="photo-preview" id="photoPreview">Foto</div>
+                <label class="photo-upload-btn">
+                    Foto hochladen
+                    <input type="file" id="photoInput" accept="image/*" style="display:none;">
+                </label>
+            </div>
+
+            <div class="form-row" style="margin-top: 1rem;">
+                <div class="form-group">
+                    <label>Vorname</label>
+                    <input type="text" id="firstName" placeholder="Max">
+                </div>
+                <div class="form-group">
+                    <label>Nachname</label>
+                    <input type="text" id="lastName" placeholder="Mustermann">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Berufsbezeichnung</label>
+                <input type="text" id="jobTitle" placeholder="z.B. Projektingenieur">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>E-Mail</label>
+                    <input type="email" id="email" placeholder="max@email.de">
+                </div>
+                <div class="form-group">
+                    <label>Telefon</label>
+                    <input type="tel" id="phone" placeholder="+49 176 1234567">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Adresse</label>
+                    <input type="text" id="address" placeholder="Musterstraße 1, 12345 Stadt">
+                </div>
+                <div class="form-group">
+                    <label>Geburtsdatum</label>
+                    <input type="text" id="birthdate" placeholder="01.01.1990">
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <div class="section-title">Über mich</div>
+            <div class="form-group">
+                <label>Kurzprofil (2-3 Sätze)</label>
+                <textarea id="summary" placeholder="Beschreibe kurz deine Erfahrung, Stärken und was du suchst..."></textarea>
+            </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="section">
+            <div class="section-title">Berufserfahrung</div>
+            <div id="experienceList">
+                <!-- Items added dynamically -->
+            </div>
+            <button class="btn-add" onclick="addExperience()">+ Berufserfahrung hinzufügen</button>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <div class="section-title">Ausbildung</div>
+            <div id="educationList">
+                <!-- Items added dynamically -->
+            </div>
+            <button class="btn-add" onclick="addEducation()">+ Ausbildung hinzufügen</button>
+        </div>
+
+        <!-- Skills -->
+        <div class="section">
+            <div class="section-title">Kompetenzen</div>
+            <div class="form-group">
+                <label>Soft Skills (kommagetrennt)</label>
+                <input type="text" id="softSkills" placeholder="Kommunikation, Teamarbeit, Problemlösung">
+            </div>
+            <div id="hardSkillsList">
+                <!-- Items added dynamically -->
+            </div>
+            <button class="btn-add" onclick="addSkill()">+ Fachkenntnis hinzufügen</button>
+        </div>
+
+        <!-- Languages -->
+        <div class="section">
+            <div class="section-title">Sprachen</div>
+            <div id="languagesList">
+                <!-- Items added dynamically -->
+            </div>
+            <button class="btn-add" onclick="addLanguage()">+ Sprache hinzufügen</button>
+        </div>
+
+        <!-- Certifications -->
+        <div class="section">
+            <div class="section-title">Zertifikate</div>
+            <div id="certificationsList">
+                <!-- Items added dynamically -->
+            </div>
+            <button class="btn-add" onclick="addCertification()">+ Zertifikat hinzufügen</button>
+        </div>
+
+    </div>
+
+    <!-- PREVIEW PANEL -->
+    <div class="preview-panel">
+        <div class="preview-placeholder">
+            <h3>📄 Lebenslauf-Vorschau</h3>
+            <p>Deine Vorschau erscheint hier im nächsten Schritt.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Color picker
+    const swatches = document.querySelectorAll('.color-swatch');
+    swatches.forEach(sw => {
+        sw.addEventListener('click', () => {
+            swatches.forEach(s => s.classList.remove('active'));
+            sw.classList.add('active');
+        });
+    });
+
+    // Photo upload
+    document.getElementById('photoInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const preview = document.getElementById('photoPreview');
+                preview.style.backgroundImage = `url(${ev.target.result})`;
+                preview.textContent = '';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Add experience
+    let expCounter = 0;
+    function addExperience() {
+        expCounter++;
+        const html = `
+            <div class="dynamic-item" id="exp-${expCounter}">
+                <div class="dynamic-item-header">
+                    <div class="dynamic-item-title">Stelle ${expCounter}</div>
+                    <button class="btn-remove" onclick="document.getElementById('exp-${expCounter}').remove()">✕</button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Von</label>
+                        <input type="text" placeholder="MM/JJJJ">
+                    </div>
+                    <div class="form-group">
+                        <label>Bis</label>
+                        <input type="text" placeholder="MM/JJJJ oder Aktuell">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Position</label>
+                    <input type="text" placeholder="z.B. Projektingenieur">
+                </div>
+                <div class="form-group">
+                    <label>Unternehmen und Ort</label>
+                    <input type="text" placeholder="z.B. Mercedes-Benz AG | Stuttgart">
+                </div>
+                <div class="form-group">
+                    <label>Aufgaben und Erfolge</label>
+                    <textarea placeholder="Was hast du gemacht? Was waren deine wichtigsten Erfolge? (eine Aufgabe pro Zeile)"></textarea>
+                </div>
+            </div>
+        `;
+        document.getElementById('experienceList').insertAdjacentHTML('beforeend', html);
+    }
+
+    // Add education
+    let eduCounter = 0;
+    function addEducation() {
+        eduCounter++;
+        const html = `
+            <div class="dynamic-item" id="edu-${eduCounter}">
+                <div class="dynamic-item-header">
+                    <div class="dynamic-item-title">Abschluss ${eduCounter}</div>
+                    <button class="btn-remove" onclick="document.getElementById('edu-${eduCounter}').remove()">✕</button>
+                </div>
+                <div class="form-group">
+                    <label>Jahr</label>
+                    <input type="text" placeholder="z.B. 2021">
+                </div>
+                <div class="form-group">
+                    <label>Abschluss</label>
+                    <input type="text" placeholder="z.B. Bachelor Maschinenbau">
+                </div>
+                <div class="form-group">
+                    <label>Institution und Ort</label>
+                    <input type="text" placeholder="z.B. Westfälische Hochschule | Gelsenkirchen">
+                </div>
+            </div>
+        `;
+        document.getElementById('educationList').insertAdjacentHTML('beforeend', html);
+    }
+
+    // Add skill
+    let skillCounter = 0;
+    function addSkill() {
+        skillCounter++;
+        const html = `
+            <div class="dynamic-item" id="skill-${skillCounter}">
+                <div class="dynamic-item-header">
+                    <div class="dynamic-item-title">Kenntnis ${skillCounter}</div>
+                    <button class="btn-remove" onclick="document.getElementById('skill-${skillCounter}').remove()">✕</button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Niveau</label>
+                        <select>
+                            <option>Experte</option>
+                            <option>Erweiterte Kenntnisse</option>
+                            <option>Grundkenntnisse</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Bereich</label>
+                        <input type="text" placeholder="z.B. Microsoft Office, Autodesk">
+                    </div>
+                </div>
+            </div>
+        `;
+        document.getElementById('hardSkillsList').insertAdjacentHTML('beforeend', html);
+    }
+
+    // Add language
+    let langCounter = 0;
+    function addLanguage() {
+        langCounter++;
+        const html = `
+            <div class="dynamic-item" id="lang-${langCounter}">
+                <div class="dynamic-item-header">
+                    <div class="dynamic-item-title">Sprache ${langCounter}</div>
+                    <button class="btn-remove" onclick="document.getElementById('lang-${langCounter}').remove()">✕</button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Sprache</label>
+                        <input type="text" placeholder="z.B. Deutsch">
+                    </div>
+                    <div class="form-group">
+                        <label>Niveau</label>
+                        <select>
+                            <option>Muttersprache</option>
+                            <option>C2 - Experte</option>
+                            <option>C1 - Fließend</option>
+                            <option>B2 - Fortgeschritten</option>
+                            <option>B1 - Mittelstufe</option>
+                            <option>A2 - Grundkenntnisse</option>
+                            <option>A1 - Anfänger</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.getElementById('languagesList').insertAdjacentHTML('beforeend', html);
+    }
+
+    // Add certification
+    let certCounter = 0;
+    function addCertification() {
+        certCounter++;
+        const html = `
+            <div class="dynamic-item" id="cert-${certCounter}">
+                <div class="dynamic-item-header">
+                    <div class="dynamic-item-title">Zertifikat ${certCounter}</div>
+                    <button class="btn-remove" onclick="document.getElementById('cert-${certCounter}').remove()">✕</button>
+                </div>
+                <div class="form-group">
+                    <label>Zertifikat</label>
+                    <input type="text" placeholder="z.B. MTM-1">
+                </div>
+            </div>
+        `;
+        document.getElementById('certificationsList').insertAdjacentHTML('beforeend', html);
+    }
+
+    // Add one of each on load to help users start
+    window.addEventListener('DOMContentLoaded', () => {
+        addExperience();
+        addEducation();
+        addSkill();
+        addLanguage();
+    });
+</script>
+
+</body>
+</html>
