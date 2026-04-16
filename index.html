@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobbrücke — Kostenlose Bewerbungshilfe für Deutschland</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #1e5f6a;
+            --ink: #1a1a1a;
+            --soft: #4a4a4a;
+            --muted: #8a8a8a;
+            --line: #e5e5e5;
+            --paper: #ffffff;
+            --bg: #f8f6f3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: rgba(248, 246, 243, 0.95);
+            border-bottom: 1px solid var(--line);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--soft);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .cta-button {
+            background: var(--accent);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cta-button:hover {
+            background: #145055;
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Fraunces', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-title .highlight {
+            color: var(--accent);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--soft);
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 650px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: #145055;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(30, 95, 106, 0.3);
+        }
+
+        .btn-secondary {
+            color: var(--soft);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s;
+            padding: 1rem 0;
+        }
+
+        .btn-secondary:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .features {
+            background: var(--paper);
+            padding: 6rem 2rem;
+        }
+
+        .features-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--soft);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-item {
+            padding: 1rem;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            background: #eaf4f5;
+        }
+
+        .feature-item h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--ink);
+        }
+
+        .feature-item p {
+            color: var(--soft);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .how-it-works {
+            padding: 6rem 2rem;
+            background: var(--bg);
+        }
+
+        .steps {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .step {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.2s;
+        }
+
+        .step:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+            border-color: var(--accent);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-family: 'Fraunces', serif;
+        }
+
+        .step h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .step p {
+            color: var(--soft);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .cta {
+            background: var(--accent);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-family: 'Fraunces', serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255,255,255,0.85);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--accent);
+            padding: 1rem 2.25rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            background: var(--paper);
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--muted);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--soft);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .section-title, .cta h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <nav class="nav">
+        <a href="#" class="logo">Jobbrücke</a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">So geht's</a></li>
+            <li><a href="#about">Über uns</a></li>
+        </ul>
+        <a href="#start" class="cta-button">Jetzt starten</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-badge">Kostenlos · Open Source · Keine Anmeldung</div>
+        <h1 class="hero-title">Der schnellste Weg zum <span class="highlight">neuen Job</span></h1>
+        <p class="hero-subtitle">Erstelle einen professionellen Lebenslauf, finde passende Stellen und generiere individuelle Anschreiben — alles kostenlos und in wenigen Minuten.</p>
+        <div class="hero-buttons">
+            <a href="#start" class="btn-primary">Kostenlos starten →</a>
+            <a href="#how" class="btn-secondary">So funktioniert's</a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="features-content">
+            <div class="section-header">
+                <div class="section-badge">Features</div>
+                <h2 class="section-title">Alles was du brauchst</h2>
+                <p class="section-subtitle">Von der Bewerbung bis zum Vorstellungsgespräch — ein kompletter Werkzeugkasten für deine Jobsuche.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📝</div>
+                    <h3>Lebenslauf-Generator</h3>
+                    <p>Moderner, individueller Lebenslauf mit Foto und eigener Farbwahl. Sofort als PDF herunterladen.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Smarte Jobsuche</h3>
+                    <p>Passende Stellen von der Agentur für Arbeit und führenden Arbeitgebern, automatisch auf dich zugeschnitten.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✉️</div>
+                    <h3>KI-Anschreiben</h3>
+                    <p>Individuelle Anschreiben für jede Position, geschrieben von KI und angepasst an das jeweilige Unternehmen.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3>Bewerbungs-Tracker</h3>
+                    <p>Behalte den Überblick über deine Bewerbungen — vom ersten Kontakt bis zur Zusage.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🇩🇪</div>
+                    <h3>Für Deutschland gemacht</h3>
+                    <p>Speziell für den deutschen Arbeitsmarkt entwickelt — mit deutschen Bewerbungsstandards und Integrationen.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Privat</h3>
+                    <p>Keine Anmeldung, keine Datenspeicherung. Deine Informationen bleiben in deinem Browser.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how" class="how-it-works">
+        <div class="features-content">
+            <div class="section-header">
+                <div class="section-badge">So einfach geht's</div>
+                <h2 class="section-title">In 4 Schritten zum Erfolg</h2>
+                <p class="section-subtitle">Vom ersten Profil bis zur fertigen Bewerbung in wenigen Minuten.</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Profil erstellen</h3>
+                    <p>Gib deine Qualifikationen und Berufserfahrung ein. Schnell, einfach, ohne Anmeldung.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Lebenslauf generieren</h3>
+                    <p>Wähle Farbe und Layout, lade dein Foto hoch und erhalte sofort einen professionellen PDF-Lebenslauf.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Passende Jobs finden</h3>
+                    <p>Automatisch werden passende Stellenanzeigen angezeigt — entweder von der Agentur für Arbeit oder von Top-Arbeitgebern.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Bewerben</h3>
+                    <p>Erstelle mit einem Klick ein maßgeschneidertes Anschreiben und bewirb dich direkt beim Arbeitgeber.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="start" class="cta">
+        <div class="cta-content">
+            <h2>Bereit für deinen nächsten Schritt?</h2>
+            <p>Starte jetzt kostenlos und erstelle deine erste professionelle Bewerbung in nur wenigen Minuten.</p>
+            <a href="#app" class="btn-white">Jetzt kostenlos starten →</a>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p class="footer-text">Jobbrücke — Ein kostenloses Open Source Projekt für Deutschland</p>
+        <ul class="footer-links">
+            <li><a href="#privacy">Datenschutz</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+            <li><a href="#github">GitHub</a></li>
+            <li><a href="#donate">Spenden</a></li>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>
