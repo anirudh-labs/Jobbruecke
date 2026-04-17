@@ -563,13 +563,11 @@
             size: pageSize
         });
 
-        const response = await fetch(
-            `https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v4/jobs?${params}`,
-            {
-                headers: {
-                    'X-API-Key': 'jobboerse-jobsuche',
-                    'Accept': 'application/json'
-                }
+        const response = await fetch(`/api/jobs?${params}`);
+
+        if (!response.ok) throw new Error('API error');
+        return await response.json();
+    }
             }
         );
 
