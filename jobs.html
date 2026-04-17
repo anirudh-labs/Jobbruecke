@@ -17,6 +17,12 @@
             --bg: #f8f6f3;
             --green: #1a6b3a;
             --green-bg: #dcfce7;
+            --red: #dc2626;
+            --red-bg: #fee2e2;
+            --amber: #d97706;
+            --amber-bg: #fef3c7;
+            --blue: #2563eb;
+            --blue-bg: #dbeafe;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -64,9 +70,9 @@
         .btn-outline {
             background: transparent;
             color: var(--accent);
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.25rem;
             border-radius: 100px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             border: 1.5px solid var(--accent);
             cursor: pointer;
@@ -79,11 +85,8 @@
         .btn-outline:hover { background: var(--accent); color: white; }
         .btn-outline:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        .search-section {
-            background: var(--accent);
-            padding: 2.5rem 2rem;
-        }
-
+        /* Search */
+        .search-section { background: var(--accent); padding: 2.5rem 2rem; }
         .search-inner { max-width: 1100px; margin: 0 auto; }
 
         .search-title {
@@ -148,6 +151,7 @@
 
         .btn-search:hover { background: #f0f9ff; transform: translateY(-1px); }
 
+        /* Main */
         .main { max-width: 1100px; margin: 0 auto; padding: 2rem; }
 
         .results-header {
@@ -166,6 +170,7 @@
 
         .results-count span { color: var(--accent); }
 
+        /* States */
         .state-box { text-align: center; padding: 5rem 2rem; color: var(--muted); }
         .state-icon { font-size: 3rem; margin-bottom: 1rem; }
 
@@ -179,8 +184,7 @@
         .state-desc { font-size: 0.9rem; line-height: 1.6; }
 
         .spinner {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border: 3px solid var(--line);
             border-top-color: var(--accent);
             border-radius: 50%;
@@ -190,6 +194,158 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
+        /* ========= TRACKER PANEL ========= */
+        .tracker-panel {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .tracker-header {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .tracker-header:hover { background: #fafafa; }
+
+        .tracker-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .tracker-header-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .saved-count {
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.65rem;
+            border-radius: 100px;
+        }
+
+        .tracker-header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .tracker-toggle {
+            font-size: 0.85rem;
+            color: var(--muted);
+            transition: transform 0.2s;
+        }
+
+        .tracker-toggle.open { transform: rotate(180deg); }
+
+        /* Tracker body */
+        .tracker-body {
+            display: none;
+            border-top: 1px solid var(--line);
+        }
+
+        .tracker-body.open { display: block; }
+
+        /* Tracker table */
+        .tracker-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tracker-table th {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: #fafafa;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .tracker-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.85rem;
+            vertical-align: middle;
+        }
+
+        .tracker-table tr:last-child td { border-bottom: none; }
+        .tracker-table tr:hover td { background: #fafafa; }
+
+        .tracker-job-title {
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .tracker-company { font-size: 0.78rem; color: var(--accent); }
+
+        /* Status badge select */
+        .status-select {
+            padding: 0.3rem 0.65rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            padding-right: 22px;
+        }
+
+        .status-nicht-beworben { background: var(--bg); color: var(--soft); border: 1px solid var(--line); }
+        .status-beworben { background: var(--blue-bg); color: var(--blue); }
+        .status-interview { background: var(--amber-bg); color: var(--amber); }
+        .status-abgelehnt { background: var(--red-bg); color: var(--red); }
+        .status-zusage { background: var(--green-bg); color: var(--green); }
+
+        .btn-delete-job {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-delete-job:hover { background: var(--red-bg); color: var(--red); }
+
+        .tracker-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafafa;
+        }
+
+        .tracker-footer-note {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        /* Job cards */
         .jobs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -221,8 +377,7 @@
         }
 
         .job-company-logo {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -242,7 +397,6 @@
             border-radius: 100px;
             background: var(--green-bg);
             color: var(--green);
-            text-transform: uppercase;
             letter-spacing: 0.05em;
             white-space: nowrap;
         }
@@ -341,42 +495,14 @@
 
         .load-more-section { text-align: center; margin-top: 2.5rem; }
 
-        .tracker-banner {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 1.5rem 2rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .tracker-banner-text h3 {
-            font-family: 'Fraunces', serif;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .tracker-banner-text p { font-size: 0.85rem; color: var(--soft); }
-
-        .saved-count {
-            background: var(--accent);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.15rem 0.6rem;
-            border-radius: 100px;
-            margin-left: 0.5rem;
-        }
-
+        /* Mobile */
         @media (max-width: 768px) {
             .search-form { grid-template-columns: 1fr; }
             .jobs-grid { grid-template-columns: 1fr; }
-            .tracker-banner { flex-direction: column; align-items: flex-start; }
-            .results-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+            .topbar { padding: 1rem; }
+            .topbar-actions .btn-ghost:not(:first-child) { display: none; }
+            .tracker-table th:nth-child(3),
+            .tracker-table td:nth-child(3) { display: none; }
         }
     </style>
 </head>
@@ -415,14 +541,41 @@
 
 <div class="main">
 
-    <div class="tracker-banner" id="trackerBanner" style="display:none;">
-        <div class="tracker-banner-text">
-            <h3>Gespeicherte Jobs <span class="saved-count" id="savedCount">0</span></h3>
-            <p>Exportiere deine gespeicherten Jobs als Excel-Datei mit Bewerbungs-Tracker</p>
+    <!-- ========= TRACKER PANEL ========= -->
+    <div class="tracker-panel" id="trackerPanel" style="display:none;">
+        <div class="tracker-header" onclick="toggleTracker()">
+            <div class="tracker-header-left">
+                <span class="tracker-header-title">Meine Bewerbungen</span>
+                <span class="saved-count" id="savedCount">0</span>
+            </div>
+            <div class="tracker-header-right">
+                <button class="btn-outline" onclick="event.stopPropagation(); exportExcel()" style="font-size:0.8rem; padding:0.4rem 1rem;">
+                    📊 Excel exportieren
+                </button>
+                <span class="tracker-toggle" id="trackerToggle">▼</span>
+            </div>
         </div>
-        <button class="btn-outline" onclick="exportExcel()">📊 Excel exportieren</button>
+        <div class="tracker-body" id="trackerBody">
+            <table class="tracker-table">
+                <thead>
+                    <tr>
+                        <th>Stelle</th>
+                        <th>Ort</th>
+                        <th>Gespeichert</th>
+                        <th>Status</th>
+                        <th>Link</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="trackerTableBody"></tbody>
+            </table>
+            <div class="tracker-footer">
+                <span class="tracker-footer-note">💾 Wird automatisch in deinem Browser gespeichert</span>
+            </div>
+        </div>
     </div>
 
+    <!-- Results -->
     <div class="results-header" id="resultsHeader" style="display:none;">
         <div class="results-count" id="resultsCount"></div>
     </div>
@@ -447,16 +600,15 @@
     var currentPage = 1;
     var pageSize = 12;
     var totalJobs = 0;
+    var trackerOpen = false;
 
     // ========= INIT =========
     window.addEventListener('DOMContentLoaded', function() {
-        // Load saved jobs
         var saved = localStorage.getItem('jobbruecke_saved_jobs');
         if (saved) {
-            try { savedJobs = JSON.parse(saved); updateTrackerBanner(); } catch(e) {}
+            try { savedJobs = JSON.parse(saved); updateTracker(); } catch(e) {}
         }
 
-        // Load profile
         var savedProfile = localStorage.getItem('jobbruecke_profile');
         var profileJobTitle = '';
         if (savedProfile) {
@@ -470,53 +622,57 @@
             } catch(e) {}
         }
 
-        // Auto-search with geolocation
         autoSearchWithLocation(profileJobTitle);
     });
 
-    // ========= AUTO SEARCH WITH LOCATION =========
+    // ========= TOGGLE TRACKER =========
+    function toggleTracker() {
+        trackerOpen = !trackerOpen;
+        var body = document.getElementById('trackerBody');
+        var toggle = document.getElementById('trackerToggle');
+        body.classList.toggle('open', trackerOpen);
+        toggle.classList.toggle('open', trackerOpen);
+    }
+
+    // ========= AUTO LOCATION SEARCH =========
     function autoSearchWithLocation(jobTitle) {
-        if (!navigator.geolocation) {
-            showWaitingState();
-            return;
-        }
+        if (!navigator.geolocation) { showWaitingState(); return; }
 
         navigator.geolocation.getCurrentPosition(
             function(position) {
-                // Get city name from coordinates using reverse geocoding
                 fetch('https://nominatim.openstreetmap.org/reverse?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&format=json')
                     .then(function(r) { return r.json(); })
                     .then(function(data) {
                         var city = data.address.city || data.address.town || data.address.village || data.address.county || '';
-                        if (city) {
+                        if (city && !document.getElementById('searchLocation').value) {
                             document.getElementById('searchLocation').value = city;
                         }
-                        // Now search with detected location
-                        var searchTerm = jobTitle || document.getElementById('searchJob').value || 'Ingenieur';
-                        document.getElementById('searchJob').value = searchTerm;
-                        doSearch(searchTerm, city || document.getElementById('searchLocation').value, 25, 1, false);
+                        var searchTerm = jobTitle || document.getElementById('searchJob').value;
+                        if (searchTerm) {
+                            doSearch(searchTerm, document.getElementById('searchLocation').value, 25, 1, false);
+                        } else {
+                            showWaitingState();
+                        }
                     })
                     .catch(function() {
-                        // Geocoding failed, search with whatever we have
-                        var searchTerm = jobTitle || 'Ingenieur';
-                        doSearch(searchTerm, document.getElementById('searchLocation').value, 25, 1, false);
+                        var searchTerm = jobTitle || document.getElementById('searchJob').value;
+                        if (searchTerm) {
+                            doSearch(searchTerm, document.getElementById('searchLocation').value, 25, 1, false);
+                        } else {
+                            showWaitingState();
+                        }
                     });
             },
-            function(err) {
-                // User denied location or error — show waiting state
-                showWaitingState();
-            },
+            function() { showWaitingState(); },
             { timeout: 5000 }
         );
     }
 
     function showWaitingState() {
         document.getElementById('jobsContainer').innerHTML =
-            '<div class="state-box">' +
-                '<div class="state-icon">🔍</div>' +
-                '<div class="state-title">Wonach suchst du?</div>' +
-                '<p class="state-desc">Gib oben eine Berufsbezeichnung und einen Ort ein<br>um passende Stellen zu finden.</p>' +
-            '</div>';
+            '<div class="state-box"><div class="state-icon">🔍</div>' +
+            '<div class="state-title">Wonach suchst du?</div>' +
+            '<p class="state-desc">Gib oben eine Berufsbezeichnung und einen Ort ein<br>um passende Stellen zu finden.</p></div>';
     }
 
     // ========= SEARCH =========
@@ -571,7 +727,7 @@
         btn.disabled = false;
     }
 
-    // ========= RENDER =========
+    // ========= RENDER JOBS =========
     function renderJobs(jobs, append) {
         var container = document.getElementById('jobsContainer');
         var resultsHeader = document.getElementById('resultsHeader');
@@ -583,9 +739,7 @@
         resultsHeader.style.display = 'flex';
         resultsCount.innerHTML = '<span>' + totalJobs + '</span> Stellen gefunden';
 
-        if (!append) {
-            container.innerHTML = '<div class="jobs-grid" id="jobsGrid"></div>';
-        }
+        if (!append) container.innerHTML = '<div class="jobs-grid" id="jobsGrid"></div>';
 
         var grid = document.getElementById('jobsGrid');
         if (!grid) return;
@@ -611,16 +765,11 @@
             '<div class="job-card-top">' +
                 '<div style="display:flex;gap:0.75rem;align-items:flex-start;flex:1;">' +
                     '<div class="job-company-logo" style="background:' + logoColor + '">' + logoLetter + '</div>' +
-                    '<div>' +
-                        '<div class="job-title">' + title + '</div>' +
-                        '<div class="job-company">' + company + '</div>' +
-                    '</div>' +
+                    '<div><div class="job-title">' + title + '</div><div class="job-company">' + company + '</div></div>' +
                 '</div>' +
-                '<span class="job-source-badge">BA</span>' +
+                '<span class="job-source-badge">✓ Verifiziert</span>' +
             '</div>' +
-            '<div class="job-meta">' +
-                (location ? '<span class="job-tag location">📍 ' + location + '</span>' : '') +
-            '</div>' +
+            '<div class="job-meta">' + (location ? '<span class="job-tag location">📍 ' + location + '</span>' : '') + '</div>' +
             (desc ? '<p class="job-desc">' + desc + '</p>' : '') +
             '<div class="job-card-footer">' +
                 '<span class="job-date">' + (date ? 'Ab ' + date : '') + '</span>' +
@@ -655,20 +804,81 @@
             if (btn) { btn.textContent = '✓ Gespeichert'; btn.classList.add('saved'); }
         }
         localStorage.setItem('jobbruecke_saved_jobs', JSON.stringify(savedJobs));
-        updateTrackerBanner();
+        updateTracker();
     }
 
-    function updateTrackerBanner() {
-        var banner = document.getElementById('trackerBanner');
+    function deleteJob(refnr) {
+        savedJobs = savedJobs.filter(function(j) { return j.refnr !== refnr; });
+        localStorage.setItem('jobbruecke_saved_jobs', JSON.stringify(savedJobs));
+
+        // Update save button on card if visible
+        var btn = document.querySelector('#card-' + refnr + ' .btn-save');
+        if (btn) { btn.textContent = '+ Speichern'; btn.classList.remove('saved'); }
+
+        updateTracker();
+    }
+
+    function updateStatus(refnr, status) {
+        var job = savedJobs.find(function(j) { return j.refnr === refnr; });
+        if (job) job.status = status;
+        localStorage.setItem('jobbruecke_saved_jobs', JSON.stringify(savedJobs));
+        updateStatusStyle(refnr, status);
+    }
+
+    function updateStatusStyle(refnr, status) {
+        var select = document.querySelector('[data-refnr="' + refnr + '"]');
+        if (!select) return;
+        select.className = 'status-select ' + getStatusClass(status);
+    }
+
+    function getStatusClass(status) {
+        var map = {
+            'Nicht beworben': 'status-nicht-beworben',
+            'Beworben': 'status-beworben',
+            'Interview': 'status-interview',
+            'Abgelehnt': 'status-abgelehnt',
+            'Zusage': 'status-zusage'
+        };
+        return map[status] || 'status-nicht-beworben';
+    }
+
+    function updateTracker() {
+        var panel = document.getElementById('trackerPanel');
         var count = document.getElementById('savedCount');
-        banner.style.display = savedJobs.length > 0 ? 'flex' : 'none';
+        var tbody = document.getElementById('trackerTableBody');
+
+        if (savedJobs.length === 0) {
+            panel.style.display = 'none';
+            return;
+        }
+
+        panel.style.display = 'block';
         count.textContent = savedJobs.length;
+
+        tbody.innerHTML = savedJobs.map(function(job) {
+            var statusClass = getStatusClass(job.status);
+            return '<tr>' +
+                '<td><div class="tracker-job-title">' + (job.title || '') + '</div><div class="tracker-company">' + (job.company || '') + '</div></td>' +
+                '<td style="color:var(--soft);">' + (job.location || '—') + '</td>' +
+                '<td style="color:var(--muted);font-size:0.78rem;">' + (job.savedAt || '') + '</td>' +
+                '<td>' +
+                    '<select class="status-select ' + statusClass + '" data-refnr="' + job.refnr + '" onchange="updateStatus(\'' + job.refnr + '\', this.value)">' +
+                        '<option ' + (job.status === 'Nicht beworben' ? 'selected' : '') + '>Nicht beworben</option>' +
+                        '<option ' + (job.status === 'Beworben' ? 'selected' : '') + '>Beworben</option>' +
+                        '<option ' + (job.status === 'Interview' ? 'selected' : '') + '>Interview</option>' +
+                        '<option ' + (job.status === 'Abgelehnt' ? 'selected' : '') + '>Abgelehnt</option>' +
+                        '<option ' + (job.status === 'Zusage' ? 'selected' : '') + '>Zusage</option>' +
+                    '</select>' +
+                '</td>' +
+                '<td><a href="' + (job.applyUrl || '#') + '" target="_blank" style="color:var(--accent);font-size:0.78rem;font-weight:500;">Bewerben →</a></td>' +
+                '<td><button class="btn-delete-job" onclick="deleteJob(\'' + job.refnr + '\')" title="Entfernen">✕</button></td>' +
+            '</tr>';
+        }).join('');
     }
 
-    // ========= EXCEL EXPORT (FIXED) =========
+    // ========= EXCEL EXPORT =========
     function exportExcel() {
         if (savedJobs.length === 0) return;
-
         var data = savedJobs.map(function(job) {
             return {
                 'Position': job.title || '',
@@ -680,13 +890,10 @@
                 'Notizen': ''
             };
         });
-
         var ws = XLSX.utils.json_to_sheet(data);
         ws['!cols'] = [{ wch: 40 }, { wch: 30 }, { wch: 20 }, { wch: 60 }, { wch: 15 }, { wch: 20 }, { wch: 30 }];
-
         var wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Bewerbungen');
-
         var date = new Date().toLocaleDateString('de-DE').replace(/\./g, '-');
         XLSX.writeFile(wb, 'Jobbruecke_Bewerbungen_' + date + '.xlsx');
     }
