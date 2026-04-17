@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anschreiben erstellen — Jobbrücke</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --accent: #1e5f6a;
+            --ink: #1a1a1a;
+            --soft: #4a4a4a;
+            --muted: #8a8a8a;
+            --line: #e5e5e5;
+            --paper: #ffffff;
+            --bg: #f8f6f3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: var(--paper);
+            border-bottom: 1px solid var(--line);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .topbar-actions { display: flex; gap: 1rem; align-items: center; }
+
+        .btn-ghost {
+            color: var(--soft);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.2s;
+        }
+
+        .btn-ghost:hover { color: var(--accent); }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-primary:hover { background: #145055; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 460px 1fr;
+            min-height: calc(100vh - 70px);
+        }
+
+        .form-panel {
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 70px);
+            border-right: 1px solid var(--line);
+            background: var(--paper);
+        }
+
+        .panel-header { margin-bottom: 1.5rem; }
+
+        .panel-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .panel-subtitle { color: var(--soft); font-size: 0.9rem; }
+
+        .section {
+            background: #fafafa;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--ink);
+        }
+
+        .section-title::before {
+            content: '';
+            width: 3px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .form-group { margin-bottom: 0.75rem; }
+        .form-group:last-child { margin-bottom: 0; }
+
+        label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--soft);
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            color: var(--ink);
+            background: white;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(30, 95, 106, 0.1);
+        }
+
+        textarea { min-height: 80px; resize: vertical; font-family: 'Inter', sans-serif; }
+
+        /* API Key section */
+        .api-section {
+            background: #fff8f0;
+            border: 1px solid #fde8c8;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .api-note {
+            font-size: 0.78rem;
+            color: #92400e;
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .api-note a { color: var(--accent); }
+
+        /* Generate button */
+        .btn-generate {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Fraunces', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-generate:hover { background: #145055; transform: translateY(-1px); }
+        .btn-generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* Preview panel */
+        .preview-panel {
+            padding: 2rem;
+            background: var(--bg);
+            overflow-y: auto;
+            max-height: calc(100vh - 70px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Empty state */
+        .preview-empty {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--muted);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .preview-empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+        .preview-empty-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.3rem;
+            color: var(--soft);
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-empty-desc { font-size: 0.9rem; line-height: 1.6; }
+
+        /* Loading state */
+        .preview-loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--muted);
+            margin: auto;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--line);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .loading-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.2rem;
+            color: var(--soft);
+            margin-bottom: 0.5rem;
+        }
+
+        .loading-steps {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        /* Letter */
+        .letter-wrapper {
+            width: 100%;
+            max-width: 210mm;
+        }
+
+        .letter-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            justify-content: flex-end;
+        }
+
+        .btn-download {
+            background: var(--accent);
+            color: white;
+            padding: 0.6rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-download:hover { background: #145055; }
+
+        .btn-regenerate {
+            background: transparent;
+            color: var(--accent);
+            padding: 0.6rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border: 1.5px solid var(--accent);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-regenerate:hover { background: var(--accent); color: white; }
+
+        /* The actual letter document */
+        .letter-doc {
+            background: white;
+            box-shadow: 0 8px 48px rgba(0,0,0,0.1);
+            padding: 50px 60px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a1a;
+            min-height: 297mm;
+            position: relative;
+        }
+
+        .letter-sender {
+            font-size: 9.5pt;
+            color: #4a4a4a;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .letter-sender strong {
+            display: block;
+            font-size: 11pt;
+            color: var(--accent);
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .letter-recipient {
+            margin-bottom: 2rem;
+            font-size: 10pt;
+            line-height: 1.6;
+        }
+
+        .letter-date {
+            text-align: right;
+            font-size: 9.5pt;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .letter-subject {
+            font-family: 'Fraunces', serif;
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .letter-body {
+            font-size: 10.5pt;
+            line-height: 1.75;
+            color: #2a2a2a;
+            white-space: pre-wrap;
+        }
+
+        .letter-signature {
+            margin-top: 2.5rem;
+            font-size: 10pt;
+        }
+
+        .letter-signature-name {
+            font-family: 'Fraunces', serif;
+            font-size: 13pt;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 1.5rem;
+        }
+
+        /* Error state */
+        .error-box {
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            font-size: 0.88rem;
+            color: #991b1b;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1100px) {
+            .container { grid-template-columns: 1fr; }
+            .form-panel { max-height: none; border-right: none; }
+            .preview-panel { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="topbar">
+    <a href="index.html" class="logo">Jobbrücke</a>
+    <div class="topbar-actions">
+        <a href="jobs.html" class="btn-ghost">← Jobs</a>
+        <a href="cv.html" class="btn-ghost">Lebenslauf</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- FORM PANEL -->
+    <div class="form-panel">
+        <div class="panel-header">
+            <h1 class="panel-title">Anschreiben erstellen</h1>
+            <p class="panel-subtitle">KI schreibt ein maßgeschneidertes Bewerbungsschreiben für dich.</p>
+        </div>
+
+        <!-- API Key -->
+        <div class="api-section">
+            <div class="section-title" style="margin-bottom:0.5rem;">🔑 Claude API-Schlüssel</div>
+            <div class="form-group">
+                <input type="password" id="apiKey" placeholder="sk-ant-api03-..." oninput="saveApiKey()">
+            </div>
+            <p class="api-note">
+                Dein Schlüssel wird nur in deinem Browser gespeichert und niemals weitergegeben.
+                API-Schlüssel bekommst du kostenlos auf <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
+                Ein Anschreiben kostet ca. 1-2 Cent.
+            </p>
+        </div>
+
+        <!-- Job Info -->
+        <div class="section">
+            <div class="section-title">Stelle</div>
+            <div class="form-group">
+                <label>Jobtitel</label>
+                <input type="text" id="jobTitleInput" placeholder="z.B. Projektingenieur">
+            </div>
+            <div class="form-group">
+                <label>Unternehmen</label>
+                <input type="text" id="companyInput" placeholder="z.B. Mercedes-Benz AG">
+            </div>
+            <div class="form-group">
+                <label>Stellenbeschreibung (optional aber empfohlen)</label>
+                <textarea id="jobDescInput" placeholder="Kopiere hier die Stellenbeschreibung rein. Je mehr Infos, desto besser das Anschreiben..."></textarea>
+            </div>
+        </div>
+
+        <!-- Your Info -->
+        <div class="section">
+            <div class="section-title">Über dich</div>
+            <div class="form-group">
+                <label>Dein vollständiger Name</label>
+                <input type="text" id="nameInput" placeholder="Max Mustermann">
+            </div>
+            <div class="form-group">
+                <label>Dein aktueller Beruf / Hintergrund</label>
+                <input type="text" id="backgroundInput" placeholder="z.B. Projektingenieur mit 4 Jahren Erfahrung im Automobilbereich">
+            </div>
+            <div class="form-group">
+                <label>Deine stärksten Qualifikationen (für diese Stelle)</label>
+                <textarea id="strengthsInput" placeholder="z.B. MTM-Analyse, Fertigungsplanung, Erfahrung mit Mercedes-Benz Projekten, C1 Deutsch..."></textarea>
+            </div>
+        </div>
+
+        <!-- 3 Quick Questions -->
+        <div class="section">
+            <div class="section-title">3 kurze Fragen</div>
+            <div class="form-group">
+                <label>Was gefällt dir an dieser Stelle besonders?</label>
+                <textarea id="q1Input" placeholder="z.B. Die Arbeit an innovativen Elektrofahrzeugen und die Möglichkeit, Prozesse von Grund auf neu zu gestalten..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Was ist deine größte Stärke für diese Rolle?</label>
+                <textarea id="q2Input" placeholder="z.B. Meine Erfahrung in der MTM-Analyse und meine interkulturelle Kompetenz durch internationale Projekte..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Wann kannst du frühestens anfangen?</label>
+                <input type="text" id="q3Input" placeholder="z.B. Ab sofort / Ab 01.06.2026 / Nach Absprache">
+            </div>
+        </div>
+
+        <div id="errorBox" class="error-box" style="display:none;"></div>
+
+        <button class="btn-generate" onclick="generateAnschreiben()" id="generateBtn">
+            ✦ Anschreiben generieren
+        </button>
+
+    </div>
+
+    <!-- PREVIEW PANEL -->
+    <div class="preview-panel" id="previewPanel">
+        <div class="preview-empty" id="previewEmpty">
+            <div class="preview-empty-icon">✉️</div>
+            <div class="preview-empty-title">Dein Anschreiben erscheint hier</div>
+            <p class="preview-empty-desc">Fülle das Formular aus und klicke auf "Anschreiben generieren". Die KI schreibt dann ein individuelles Bewerbungsschreiben für dich.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ========= LOAD SAVED DATA =========
+    window.addEventListener('DOMContentLoaded', function() {
+        // Load API key
+        var savedKey = localStorage.getItem('jobbruecke_api_key');
+        if (savedKey) document.getElementById('apiKey').value = savedKey;
+
+        // Load profile data
+        var savedProfile = localStorage.getItem('jobbruecke_profile');
+        if (savedProfile) {
+            try {
+                var profile = JSON.parse(savedProfile);
+                if (profile.jobTitle) document.getElementById('backgroundInput').value = profile.jobTitle;
+            } catch(e) {}
+        }
+
+        // Load from URL params (when coming from jobs page)
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('job')) document.getElementById('jobTitleInput').value = params.get('job');
+        if (params.get('company')) document.getElementById('companyInput').value = params.get('company');
+    });
+
+    function saveApiKey() {
+        var key = document.getElementById('apiKey').value;
+        if (key) localStorage.setItem('jobbruecke_api_key', key);
+    }
+
+    // ========= GENERATE =========
+    async function generateAnschreiben() {
+        var apiKey = document.getElementById('apiKey').value.trim();
+        var jobTitle = document.getElementById('jobTitleInput').value.trim();
+        var company = document.getElementById('companyInput').value.trim();
+        var jobDesc = document.getElementById('jobDescInput').value.trim();
+        var name = document.getElementById('nameInput').value.trim();
+        var background = document.getElementById('backgroundInput').value.trim();
+        var strengths = document.getElementById('strengthsInput').value.trim();
+        var q1 = document.getElementById('q1Input').value.trim();
+        var q2 = document.getElementById('q2Input').value.trim();
+        var q3 = document.getElementById('q3Input').value.trim();
+
+        // Validation
+        var errorBox = document.getElementById('errorBox');
+        errorBox.style.display = 'none';
+
+        if (!apiKey) { showError('Bitte gib deinen Claude API-Schlüssel ein.'); return; }
+        if (!apiKey.startsWith('sk-ant')) { showError('Der API-Schlüssel scheint ungültig zu sein. Er sollte mit "sk-ant" beginnen.'); return; }
+        if (!jobTitle) { showError('Bitte gib den Jobtitel ein.'); return; }
+        if (!company) { showError('Bitte gib den Unternehmensnamen ein.'); return; }
+        if (!name) { showError('Bitte gib deinen Namen ein.'); return; }
+
+        // Show loading
+        var btn = document.getElementById('generateBtn');
+        btn.disabled = true;
+        btn.textContent = '⏳ Wird generiert...';
+        showLoading();
+
+        var prompt = buildPrompt(jobTitle, company, jobDesc, name, background, strengths, q1, q2, q3);
+
+        try {
+            var response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': apiKey,
+                    'anthropic-version': '2023-06-01',
+                    'anthropic-dangerous-direct-browser-access': 'true'
+                },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-20250514',
+                    max_tokens: 1500,
+                    messages: [{ role: 'user', content: prompt }]
+                })
+            });
+
+            if (!response.ok) {
+                var errData = await response.json();
+                throw new Error(errData.error ? errData.error.message : 'API Fehler: ' + response.status);
+            }
+
+            var data = await response.json();
+            var letterText = data.content[0].text;
+
+            displayLetter(letterText, name, jobTitle, company);
+
+        } catch(err) {
+            showPreviewEmpty();
+            showError('Fehler: ' + err.message);
+        }
+
+        btn.disabled = false;
+        btn.textContent = '✦ Anschreiben generieren';
+    }
+
+    // ========= BUILD PROMPT =========
+    function buildPrompt(jobTitle, company, jobDesc, name, background, strengths, q1, q2, q3) {
+        return 'Schreibe ein professionelles deutsches Bewerbungsanschreiben (Anschreiben) für folgende Bewerbung.\n\n' +
+            'STELLE:\n' +
+            'Position: ' + jobTitle + '\n' +
+            'Unternehmen: ' + company + '\n' +
+            (jobDesc ? 'Stellenbeschreibung:\n' + jobDesc + '\n\n' : '\n') +
+            'BEWERBER:\n' +
+            'Name: ' + name + '\n' +
+            'Hintergrund: ' + background + '\n' +
+            (strengths ? 'Qualifikationen: ' + strengths + '\n' : '') +
+            '\nPERSÖNLICHE ANTWORTEN:\n' +
+            (q1 ? 'Was gefällt an der Stelle: ' + q1 + '\n' : '') +
+            (q2 ? 'Größte Stärke für diese Rolle: ' + q2 + '\n' : '') +
+            (q3 ? 'Frühester Eintrittstermin: ' + q3 + '\n' : '') +
+            '\nANWEISUNGEN:\n' +
+            '- Schreibe NUR den Haupttext des Anschreibens (ab "Sehr geehrte Damen und Herren" bis zur Grußformel)\n' +
+            '- KEIN Absender, KEIN Datum, KEINE Betreffzeile — nur der Brieftext\n' +
+            '- Professionell aber persönlich, nicht zu formell\n' +
+            '- 3-4 Absätze, ca. 250-350 Wörter\n' +
+            '- Authentisch und spezifisch — verwende die persönlichen Antworten natürlich eingebaut\n' +
+            '- Schließe mit: "Mit freundlichen Grüßen"\n' +
+            '- Keine Platzhalter wie [Datum] oder [Name] verwenden\n' +
+            '- Direkt mit dem Brieftext beginnen, keine Erklärungen vorher';
+    }
+
+    // ========= DISPLAY LETTER =========
+    function displayLetter(text, name, jobTitle, company) {
+        var today = new Date().toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' });
+
+        var panel = document.getElementById('previewPanel');
+        panel.innerHTML =
+            '<div class="letter-wrapper">' +
+                '<div class="letter-actions">' +
+                    '<button class="btn-regenerate" onclick="generateAnschreiben()">↺ Neu generieren</button>' +
+                    '<button class="btn-download" onclick="downloadLetter()">📄 PDF herunterladen</button>' +
+                '</div>' +
+                '<div class="letter-doc" id="letterDoc">' +
+                    '<div class="letter-sender">' +
+                        '<strong>' + name + '</strong>' +
+                    '</div>' +
+                    '<div class="letter-date">' + today + '</div>' +
+                    '<div class="letter-recipient">' +
+                        '<strong>' + company + '</strong>' +
+                    '</div>' +
+                    '<div class="letter-subject">Bewerbung als ' + jobTitle + '</div>' +
+                    '<div class="letter-body" id="letterBody">' + text + '</div>' +
+                    '<div class="letter-signature">' +
+                        'Mit freundlichen Grüßen' +
+                        '<div class="letter-signature-name">' + name + '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+    }
+
+    // ========= PDF DOWNLOAD =========
+    function downloadLetter() {
+        var doc = document.getElementById('letterDoc');
+        var name = document.getElementById('nameInput').value || 'Anschreiben';
+        var company = document.getElementById('companyInput').value || 'Bewerbung';
+        var filename = (name + '_' + company + '_Anschreiben.pdf').replace(/\s+/g, '_');
+
+        var options = {
+            margin: 0,
+            filename: filename,
+            image: { type: 'jpeg', quality: 1 },
+            html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(options).from(doc).save();
+    }
+
+    // ========= STATES =========
+    function showLoading() {
+        document.getElementById('previewPanel').innerHTML =
+            '<div class="preview-loading">' +
+                '<div class="spinner"></div>' +
+                '<div class="loading-title">KI schreibt dein Anschreiben...</div>' +
+                '<div class="loading-steps">' +
+                    '✓ Stelle analysieren<br>' +
+                    '✓ Dein Profil einbeziehen<br>' +
+                    '✓ Brief formulieren<br>' +
+                    '✓ Auf Deutsch verfassen' +
+                '</div>' +
+            '</div>';
+    }
+
+    function showPreviewEmpty() {
+        document.getElementById('previewPanel').innerHTML =
+            '<div class="preview-empty">' +
+                '<div class="preview-empty-icon">✉️</div>' +
+                '<div class="preview-empty-title">Dein Anschreiben erscheint hier</div>' +
+                '<p class="preview-empty-desc">Fülle das Formular aus und klicke auf Generieren.</p>' +
+            '</div>';
+    }
+
+    function showError(msg) {
+        var box = document.getElementById('errorBox');
+        if (box) {
+            box.style.display = 'block';
+            box.textContent = '⚠️ ' + msg;
+        }
+    }
+</script>
+
+</body>
+</html>
