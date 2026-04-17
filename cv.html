@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lebenslauf erstellen — Jobbrücke</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
             --accent: #1e5f6a;
@@ -25,7 +26,6 @@
             min-height: 100vh;
         }
 
-        /* ========= TOP BAR ========= */
         .topbar {
             background: var(--paper);
             border-bottom: 1px solid var(--line);
@@ -61,7 +61,6 @@
             color: white;
             padding: 0.7rem 1.5rem;
             border-radius: 100px;
-            text-decoration: none;
             font-size: 0.9rem;
             font-weight: 600;
             border: none;
@@ -73,15 +72,14 @@
         }
 
         .btn-primary:hover { background: #145055; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-        /* ========= LAYOUT ========= */
         .container {
             display: grid;
             grid-template-columns: 480px 1fr;
             min-height: calc(100vh - 70px);
         }
 
-        /* ========= FORM PANEL ========= */
         .form-panel {
             padding: 2rem;
             overflow-y: auto;
@@ -246,6 +244,7 @@
             font-weight: 600;
             border: 2px solid white;
             outline: 1px solid var(--line);
+            flex-shrink: 0;
         }
 
         .photo-upload-btn {
@@ -288,7 +287,6 @@
             margin-bottom: -80mm;
         }
 
-        /* Sidebar */
         .cv-sidebar {
             background: var(--accent);
             color: white;
@@ -338,15 +336,13 @@
             word-break: break-word;
         }
 
-        /* Expertise - clean comma-separated */
         .cv-expertise-text {
             font-size: 0.8rem;
-            line-height: 1.65;
+            line-height: 1.7;
             color: rgba(255,255,255,0.92);
             font-weight: 300;
         }
 
-        /* Qualifikationen - clean list with issuer */
         .cv-qual-item {
             font-size: 0.78rem;
             margin-bottom: 10px;
@@ -355,21 +351,9 @@
         }
 
         .cv-qual-item:last-child { margin-bottom: 0; }
+        .cv-qual-name { font-weight: 500; color: white; display: block; margin-bottom: 1px; }
+        .cv-qual-issuer { font-size: 0.72rem; color: rgba(255,255,255,0.6); font-weight: 300; }
 
-        .cv-qual-name {
-            font-weight: 500;
-            color: white;
-            display: block;
-            margin-bottom: 1px;
-        }
-
-        .cv-qual-issuer {
-            font-size: 0.72rem;
-            color: rgba(255,255,255,0.6);
-            font-weight: 300;
-        }
-
-        /* Languages - magazine style */
         .cv-lang-item {
             font-size: 0.8rem;
             margin-bottom: 8px;
@@ -377,21 +361,9 @@
             line-height: 1.4;
         }
 
-        .cv-lang-name {
-            font-weight: 500;
-            color: white;
-            display: inline-block;
-        }
+        .cv-lang-name { font-weight: 500; color: white; display: inline-block; }
+        .cv-lang-level { color: rgba(255,255,255,0.65); font-weight: 300; font-size: 0.74rem; display: block; margin-top: 1px; }
 
-        .cv-lang-level {
-            color: rgba(255,255,255,0.65);
-            font-weight: 300;
-            font-size: 0.74rem;
-            display: block;
-            margin-top: 1px;
-        }
-
-        /* Main */
         .cv-main { padding: 40px 40px; }
 
         .cv-header { margin-bottom: 32px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
@@ -418,14 +390,6 @@
             letter-spacing: 0.02em;
         }
 
-        .cv-contact-inline {
-            font-size: 0.78rem;
-            color: var(--soft);
-            line-height: 1.5;
-        }
-
-        .cv-contact-inline div { margin-bottom: 2px; }
-
         .cv-section { margin-bottom: 24px; }
 
         .cv-section-title {
@@ -451,26 +415,11 @@
             letter-spacing: 0.02em;
         }
 
-        .cv-exp-role {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--ink);
-            display: inline;
-        }
-
-        .cv-exp-company {
-            font-size: 0.82rem;
-            color: var(--soft);
-            margin-bottom: 7px;
-        }
-
+        .cv-exp-role { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+        .cv-exp-company { font-size: 0.82rem; color: var(--soft); margin-bottom: 7px; }
         .cv-exp-company .sep { color: var(--muted); margin: 0 5px; }
 
-        .cv-exp-bullets {
-            list-style: none;
-            padding: 0;
-            margin-top: 5px;
-        }
+        .cv-exp-bullets { list-style: none; padding: 0; margin-top: 5px; }
 
         .cv-exp-bullets li {
             font-size: 0.78rem;
@@ -489,17 +438,8 @@
             font-weight: 700;
         }
 
-        .cv-edu-degree {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 2px;
-        }
-
-        .cv-edu-school {
-            font-size: 0.82rem;
-            color: var(--soft);
-        }
+        .cv-edu-degree { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+        .cv-edu-school { font-size: 0.82rem; color: var(--soft); }
 
         @media (max-width: 1200px) {
             .preview-panel { display: none; }
@@ -514,25 +454,24 @@
     <a href="index.html" class="logo">Jobbrücke</a>
     <div class="topbar-actions">
         <a href="index.html" class="btn-ghost">← Zurück</a>
-        <button class="btn-primary" onclick="alert('PDF-Download kommt im nächsten Schritt!')">📄 PDF herunterladen</button>
+        <button class="btn-primary" onclick="downloadPDF()" id="pdfBtn">📄 PDF herunterladen</button>
     </div>
 </header>
 
 <div class="container">
 
-    <!-- ========= FORM PANEL ========= -->
+    <!-- FORM PANEL -->
     <div class="form-panel">
         <div class="panel-header">
             <h1 class="panel-title">Dein Lebenslauf</h1>
             <p class="panel-subtitle">Fülle aus — der Lebenslauf rechts aktualisiert sich live.</p>
         </div>
 
-        <!-- Design -->
         <div class="section">
             <div class="section-title">Design</div>
             <div class="form-group">
                 <label>Akzentfarbe</label>
-                <div class="color-picker" id="colorPicker">
+                <div class="color-picker">
                     <div class="color-swatch active" style="background:#1e5f6a" data-color="#1e5f6a"></div>
                     <div class="color-swatch" style="background:#1a3a5c" data-color="#1a3a5c"></div>
                     <div class="color-swatch" style="background:#2d5f3f" data-color="#2d5f3f"></div>
@@ -545,7 +484,6 @@
             </div>
         </div>
 
-        <!-- Personal Info -->
         <div class="section">
             <div class="section-title">Persönliche Daten</div>
             <div class="photo-upload">
@@ -555,7 +493,7 @@
                     <input type="file" id="photoInput" accept="image/*" style="display:none;">
                 </label>
             </div>
-            <div class="form-row" style="margin-top: 1rem;">
+            <div class="form-row" style="margin-top:1rem;">
                 <div class="form-group">
                     <label>Vorname</label>
                     <input type="text" id="firstName" placeholder="Max" oninput="updatePreview()">
@@ -591,21 +529,18 @@
             </div>
         </div>
 
-        <!-- Experience -->
         <div class="section">
             <div class="section-title">Berufserfahrung</div>
             <div id="experienceList"></div>
             <button class="btn-add" onclick="addExperience()">+ Berufserfahrung hinzufügen</button>
         </div>
 
-        <!-- Education -->
         <div class="section">
             <div class="section-title">Studium & Abschlüsse</div>
             <div id="educationList"></div>
             <button class="btn-add" onclick="addEducation()">+ Abschluss hinzufügen</button>
         </div>
 
-        <!-- Expertise -->
         <div class="section">
             <div class="section-title">Expertise</div>
             <div class="form-group">
@@ -614,14 +549,12 @@
             </div>
         </div>
 
-        <!-- Languages -->
         <div class="section">
             <div class="section-title">Sprachen</div>
             <div id="languagesList"></div>
             <button class="btn-add" onclick="addLanguage()">+ Sprache hinzufügen</button>
         </div>
 
-        <!-- Qualifications -->
         <div class="section">
             <div class="section-title">Qualifikationen</div>
             <div id="qualificationsList"></div>
@@ -630,11 +563,10 @@
 
     </div>
 
-    <!-- ========= PREVIEW PANEL ========= -->
+    <!-- PREVIEW PANEL -->
     <div class="preview-panel">
         <div class="cv" id="cvPreview">
 
-            <!-- CV Sidebar -->
             <aside class="cv-sidebar">
                 <div class="cv-photo" id="cvPhoto">Foto</div>
 
@@ -651,7 +583,7 @@
                     <div class="cv-expertise-text" id="cvExpertise">Microsoft Office, Autodesk Fusion 360, Python</div>
                 </div>
 
-                <div class="cv-side-section" id="cvLangSection">
+                <div class="cv-side-section">
                     <div class="cv-side-label">Sprachen</div>
                     <div id="cvLanguages">
                         <div class="cv-lang-item">
@@ -663,16 +595,10 @@
 
                 <div class="cv-side-section" id="cvQualSection">
                     <div class="cv-side-label">Qualifikationen</div>
-                    <div id="cvQualifications">
-                        <div class="cv-qual-item">
-                            <span class="cv-qual-name">Beispiel-Qualifikation</span>
-                            <span class="cv-qual-issuer">Institution · 2023</span>
-                        </div>
-                    </div>
+                    <div id="cvQualifications"></div>
                 </div>
             </aside>
 
-            <!-- CV Main -->
             <main class="cv-main">
                 <div class="cv-header">
                     <h1 class="cv-name">
@@ -687,7 +613,7 @@
                     <div id="cvExperience">
                         <div class="cv-exp-item">
                             <div class="cv-exp-period">Zeitraum</div>
-                            <div class="cv-exp-company"><span class="cv-exp-role">Position</span><span class="sep">|</span>Unternehmen</div>
+                            <div class="cv-exp-company"><span class="cv-exp-role">Position</span> <span class="sep">|</span> Unternehmen</div>
                         </div>
                     </div>
                 </div>
@@ -715,30 +641,36 @@
         sw.addEventListener('click', () => {
             document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
             sw.classList.add('active');
-            document.documentElement.style.setProperty('--accent', sw.dataset.color);
+            const color = sw.dataset.color;
+            document.documentElement.style.setProperty('--accent', color);
+            currentAccentColor = color;
         });
     });
 
-    // ========= PHOTO UPLOAD =========
+    // ========= PHOTO =========
+    let photoDataUrl = null;
+
     document.getElementById('photoInput').addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(ev) {
-                document.getElementById('photoPreview').style.backgroundImage = `url(${ev.target.result})`;
+                photoDataUrl = ev.target.result;
+                document.getElementById('photoPreview').style.backgroundImage = `url(${photoDataUrl})`;
                 document.getElementById('photoPreview').textContent = '';
-                document.getElementById('cvPhoto').style.backgroundImage = `url(${ev.target.result})`;
+                document.getElementById('cvPhoto').style.backgroundImage = `url(${photoDataUrl})`;
                 document.getElementById('cvPhoto').textContent = '';
             };
             reader.readAsDataURL(file);
         }
     });
 
-    // ========= DATA ARRAYS =========
+    // ========= DATA =========
     let experiences = [];
     let educations = [];
     let languages = [];
     let qualifications = [];
+    let currentAccentColor = '#1e5f6a';
 
     // ========= EXPERIENCE =========
     function addExperience() {
@@ -756,13 +688,11 @@
 
     function updateExperience(id, field, value) {
         const exp = experiences.find(e => e.id === id);
-        if (exp) exp[field] = value;
-        updatePreview();
+        if (exp) { exp[field] = value; updatePreview(); }
     }
 
     function renderExperienceForm() {
-        const list = document.getElementById('experienceList');
-        list.innerHTML = experiences.map((exp, i) => `
+        document.getElementById('experienceList').innerHTML = experiences.map((exp, i) => `
             <div class="dynamic-item">
                 <div class="dynamic-item-header">
                     <div class="dynamic-item-title">Stelle ${i + 1}</div>
@@ -775,7 +705,7 @@
                     </div>
                     <div class="form-group">
                         <label>Bis</label>
-                        <input type="text" placeholder="MM/JJJJ oder Aktuell" value="${exp.to}" oninput="updateExperience(${exp.id}, 'to', this.value)">
+                        <input type="text" placeholder="Aktuell" value="${exp.to}" oninput="updateExperience(${exp.id}, 'to', this.value)">
                     </div>
                 </div>
                 <div class="form-group">
@@ -810,13 +740,11 @@
 
     function updateEducation(id, field, value) {
         const edu = educations.find(e => e.id === id);
-        if (edu) edu[field] = value;
-        updatePreview();
+        if (edu) { edu[field] = value; updatePreview(); }
     }
 
     function renderEducationForm() {
-        const list = document.getElementById('educationList');
-        list.innerHTML = educations.map((edu, i) => `
+        document.getElementById('educationList').innerHTML = educations.map((edu, i) => `
             <div class="dynamic-item">
                 <div class="dynamic-item-header">
                     <div class="dynamic-item-title">Abschluss ${i + 1}</div>
@@ -854,13 +782,11 @@
 
     function updateLanguage(id, field, value) {
         const lang = languages.find(l => l.id === id);
-        if (lang) lang[field] = value;
-        updatePreview();
+        if (lang) { lang[field] = value; updatePreview(); }
     }
 
     function renderLanguageForm() {
-        const list = document.getElementById('languagesList');
-        list.innerHTML = languages.map((lang, i) => `
+        document.getElementById('languagesList').innerHTML = languages.map((lang, i) => `
             <div class="dynamic-item">
                 <div class="dynamic-item-header">
                     <div class="dynamic-item-title">Sprache ${i + 1}</div>
@@ -874,13 +800,13 @@
                     <div class="form-group">
                         <label>Niveau</label>
                         <select onchange="updateLanguage(${lang.id}, 'level', this.value)">
-                            <option ${lang.level === 'Muttersprache' ? 'selected' : ''}>Muttersprache</option>
-                            <option ${lang.level === 'C2 - Experte' ? 'selected' : ''}>C2 - Experte</option>
-                            <option ${lang.level === 'C1 - Fließend' ? 'selected' : ''}>C1 - Fließend</option>
-                            <option ${lang.level === 'B2 - Fortgeschritten' ? 'selected' : ''}>B2 - Fortgeschritten</option>
-                            <option ${lang.level === 'B1 - Mittelstufe' ? 'selected' : ''}>B1 - Mittelstufe</option>
-                            <option ${lang.level === 'A2 - Grundkenntnisse' ? 'selected' : ''}>A2 - Grundkenntnisse</option>
-                            <option ${lang.level === 'A1 - Anfänger' ? 'selected' : ''}>A1 - Anfänger</option>
+                            <option ${lang.level==='Muttersprache'?'selected':''}>Muttersprache</option>
+                            <option ${lang.level==='C2 - Experte'?'selected':''}>C2 - Experte</option>
+                            <option ${lang.level==='C1 - Fließend'?'selected':''}>C1 - Fließend</option>
+                            <option ${lang.level==='B2 - Fortgeschritten'?'selected':''}>B2 - Fortgeschritten</option>
+                            <option ${lang.level==='B1 - Mittelstufe'?'selected':''}>B1 - Mittelstufe</option>
+                            <option ${lang.level==='A2 - Grundkenntnisse'?'selected':''}>A2 - Grundkenntnisse</option>
+                            <option ${lang.level==='A1 - Anfänger'?'selected':''}>A1 - Anfänger</option>
                         </select>
                     </div>
                 </div>
@@ -904,13 +830,11 @@
 
     function updateQualification(id, field, value) {
         const qual = qualifications.find(q => q.id === id);
-        if (qual) qual[field] = value;
-        updatePreview();
+        if (qual) { qual[field] = value; updatePreview(); }
     }
 
     function renderQualificationForm() {
-        const list = document.getElementById('qualificationsList');
-        list.innerHTML = qualifications.map((qual, i) => `
+        document.getElementById('qualificationsList').innerHTML = qualifications.map((qual, i) => `
             <div class="dynamic-item">
                 <div class="dynamic-item-header">
                     <div class="dynamic-item-title">Qualifikation ${i + 1}</div>
@@ -936,30 +860,25 @@
 
     // ========= UPDATE PREVIEW =========
     function updatePreview() {
-        const first = document.getElementById('firstName').value || 'Vorname';
-        const last = document.getElementById('lastName').value || 'Nachname';
-        document.getElementById('cvFirstName').textContent = first;
-        document.getElementById('cvLastName').textContent = last;
+        document.getElementById('cvFirstName').textContent = document.getElementById('firstName').value || 'Vorname';
+        document.getElementById('cvLastName').textContent = document.getElementById('lastName').value || 'Nachname';
 
         const jobTitle = document.getElementById('jobTitle').value;
-        document.getElementById('cvJobTitle').textContent = jobTitle;
-        document.getElementById('cvJobTitle').style.display = jobTitle ? 'block' : 'none';
+        const cvJobTitle = document.getElementById('cvJobTitle');
+        cvJobTitle.textContent = jobTitle;
+        cvJobTitle.style.display = jobTitle ? 'block' : 'none';
 
         document.getElementById('cvSidePhone').textContent = document.getElementById('phone').value || '+49 000 000 000';
         document.getElementById('cvSideEmail').textContent = document.getElementById('email').value || 'email@example.de';
         document.getElementById('cvSideAddress').textContent = document.getElementById('address').value || 'Adresse';
         const bday = document.getElementById('birthdate').value;
-        document.getElementById('cvSideBirthdate').innerHTML = bday ? `geb. ${bday}` : '';
+        document.getElementById('cvSideBirthdate').textContent = bday ? `geb. ${bday}` : '';
 
         // Expertise
         const expertise = document.getElementById('expertise').value;
-        const expSection = document.getElementById('cvExpertiseSection');
-        if (expertise.trim()) {
-            expSection.style.display = 'block';
-            document.getElementById('cvExpertise').textContent = expertise;
-        } else {
-            expSection.style.display = 'none';
-        }
+        const expertiseSection = document.getElementById('cvExpertiseSection');
+        expertiseSection.style.display = expertise.trim() ? 'block' : 'none';
+        document.getElementById('cvExpertise').textContent = expertise;
 
         // Languages
         const langsHtml = languages.filter(l => l.name.trim()).map(l => `
@@ -973,34 +892,22 @@
         // Qualifications
         const qualsHtml = qualifications.filter(q => q.name.trim()).map(q => {
             const issuerPart = [q.issuer, q.year].filter(x => x.trim()).join(' · ');
-            return `
-                <div class="cv-qual-item">
-                    <span class="cv-qual-name">${q.name}</span>
-                    ${issuerPart ? `<span class="cv-qual-issuer">${issuerPart}</span>` : ''}
-                </div>
-            `;
+            return `<div class="cv-qual-item"><span class="cv-qual-name">${q.name}</span>${issuerPart ? `<span class="cv-qual-issuer">${issuerPart}</span>` : ''}</div>`;
         }).join('');
         const qualSection = document.getElementById('cvQualSection');
-        if (qualsHtml) {
-            qualSection.style.display = 'block';
-            document.getElementById('cvQualifications').innerHTML = qualsHtml;
-        } else {
-            qualSection.style.display = 'none';
-        }
+        qualSection.style.display = qualsHtml ? 'block' : 'none';
+        document.getElementById('cvQualifications').innerHTML = qualsHtml;
 
         // Experience
         const expHtml = experiences.map(exp => {
-            const period = (exp.from || exp.to) ? `${exp.from} - ${exp.to}` : 'Zeitraum';
-            const role = exp.role || 'Position';
-            const company = exp.company || 'Unternehmen';
+            const period = (exp.from || exp.to) ? `${exp.from}${exp.to ? ' – ' + exp.to : ''}` : 'Zeitraum';
             const bullets = exp.bullets.split('\n').filter(b => b.trim());
             return `
                 <div class="cv-exp-item">
                     <div class="cv-exp-period">${period}</div>
-                    <div class="cv-exp-company"><span class="cv-exp-role">${role}</span>${company ? ' <span class="sep">|</span> ' + company : ''}</div>
+                    <div class="cv-exp-company"><span class="cv-exp-role">${exp.role || 'Position'}</span>${exp.company ? ' <span class="sep">|</span> ' + exp.company : ''}</div>
                     ${bullets.length ? `<ul class="cv-exp-bullets">${bullets.map(b => `<li>${b.trim()}</li>`).join('')}</ul>` : ''}
-                </div>
-            `;
+                </div>`;
         }).join('');
         document.getElementById('cvExperience').innerHTML = expHtml || '<div class="cv-exp-item"><div class="cv-exp-period">Zeitraum</div><div class="cv-exp-company"><span class="cv-exp-role">Position</span> <span class="sep">|</span> Unternehmen</div></div>';
 
@@ -1010,9 +917,49 @@
                 <div class="cv-edu-period">${edu.year || 'Jahr'}</div>
                 <div class="cv-edu-degree">${edu.degree || 'Abschluss'}</div>
                 <div class="cv-edu-school">${edu.school || 'Institution'}</div>
-            </div>
-        `).join('');
+            </div>`).join('');
         document.getElementById('cvEducation').innerHTML = eduHtml || '<div class="cv-edu-item"><div class="cv-edu-period">Jahr</div><div class="cv-edu-degree">Abschluss</div><div class="cv-edu-school">Institution</div></div>';
+    }
+
+    // ========= PDF DOWNLOAD =========
+    function downloadPDF() {
+        const btn = document.getElementById('pdfBtn');
+        btn.textContent = '⏳ Wird erstellt...';
+        btn.disabled = true;
+
+        const cv = document.getElementById('cvPreview');
+
+        // Reset scale for clean capture
+        cv.style.transform = 'none';
+        cv.style.marginBottom = '0';
+
+        const firstName = document.getElementById('firstName').value || 'Lebenslauf';
+        const lastName = document.getElementById('lastName').value || '';
+        const filename = `${firstName}_${lastName}_Lebenslauf.pdf`.replace(/\s+/g, '_');
+
+        const options = {
+            margin: 0,
+            filename: filename,
+            image: { type: 'jpeg', quality: 1 },
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff'
+            },
+            jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
+            }
+        };
+
+        html2pdf().set(options).from(cv).save().then(() => {
+            cv.style.transform = 'scale(0.75)';
+            cv.style.marginBottom = '-80mm';
+            btn.textContent = '📄 PDF herunterladen';
+            btn.disabled = false;
+        });
     }
 
     // ========= INIT =========
