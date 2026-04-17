@@ -28,7 +28,6 @@
             min-height: 100vh;
         }
 
-        /* ========= TOPBAR ========= */
         .topbar {
             background: var(--paper);
             border-bottom: 1px solid var(--line);
@@ -59,25 +58,6 @@
             padding: 0.5rem 1rem;
         }
 
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 100px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            text-decoration: none;
-        }
-
-        .btn-primary:hover { background: #145055; transform: translateY(-1px); }
-        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
         .btn-outline {
             background: transparent;
             color: var(--accent);
@@ -96,16 +76,12 @@
         .btn-outline:hover { background: var(--accent); color: white; }
         .btn-outline:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* ========= SEARCH BAR ========= */
         .search-section {
             background: var(--accent);
             padding: 2.5rem 2rem;
         }
 
-        .search-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+        .search-inner { max-width: 1100px; margin: 0 auto; }
 
         .search-title {
             font-family: 'Fraunces', serif;
@@ -151,11 +127,7 @@
         }
 
         .search-input::placeholder { color: rgba(255,255,255,0.5); }
-
-        .search-input:focus {
-            border-color: rgba(255,255,255,0.6);
-            background: rgba(255,255,255,0.18);
-        }
+        .search-input:focus { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.18); }
 
         .btn-search {
             background: white;
@@ -171,19 +143,10 @@
             align-self: end;
         }
 
-        .btn-search:hover {
-            background: #f0f9ff;
-            transform: translateY(-1px);
-        }
+        .btn-search:hover { background: #f0f9ff; transform: translateY(-1px); }
 
-        /* ========= MAIN CONTENT ========= */
-        .main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        .main { max-width: 1100px; margin: 0 auto; padding: 2rem; }
 
-        /* Results header */
         .results-header {
             display: flex;
             justify-content: space-between;
@@ -198,17 +161,9 @@
             color: var(--ink);
         }
 
-        .results-count span {
-            color: var(--accent);
-        }
+        .results-count span { color: var(--accent); }
 
-        /* ========= EMPTY / LOADING STATES ========= */
-        .state-box {
-            text-align: center;
-            padding: 5rem 2rem;
-            color: var(--muted);
-        }
-
+        .state-box { text-align: center; padding: 5rem 2rem; color: var(--muted); }
         .state-icon { font-size: 3rem; margin-bottom: 1rem; }
 
         .state-title {
@@ -232,7 +187,6 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ========= JOB CARDS ========= */
         .jobs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -248,7 +202,6 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            position: relative;
         }
 
         .job-card:hover {
@@ -268,7 +221,6 @@
             width: 44px;
             height: 44px;
             border-radius: 10px;
-            background: var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -301,17 +253,9 @@
             margin-bottom: 0.25rem;
         }
 
-        .job-company {
-            font-size: 0.85rem;
-            color: var(--accent);
-            font-weight: 500;
-        }
+        .job-company { font-size: 0.85rem; color: var(--accent); font-weight: 500; }
 
-        .job-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
+        .job-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
         .job-tag {
             font-size: 0.75rem;
@@ -330,11 +274,10 @@
             font-size: 0.82rem;
             color: var(--soft);
             line-height: 1.6;
+            overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 3;
-            line-clamp: 3;
             -webkit-box-orient: vertical;
-            overflow: hidden;
         }
 
         .job-card-footer {
@@ -346,11 +289,7 @@
             margin-top: auto;
         }
 
-        .job-date {
-            font-size: 0.75rem;
-            color: var(--muted);
-        }
-
+        .job-date { font-size: 0.75rem; color: var(--muted); }
         .job-actions { display: flex; gap: 0.5rem; }
 
         .btn-apply {
@@ -383,13 +322,8 @@
         .btn-save:hover { border-color: var(--accent); color: var(--accent); }
         .btn-save.saved { background: var(--green-bg); color: var(--green); border-color: var(--green); }
 
-        /* ========= LOAD MORE ========= */
-        .load-more-section {
-            text-align: center;
-            margin-top: 2.5rem;
-        }
+        .load-more-section { text-align: center; margin-top: 2.5rem; }
 
-        /* ========= TRACKER BANNER ========= */
         .tracker-banner {
             background: var(--paper);
             border: 1px solid var(--line);
@@ -409,10 +343,7 @@
             margin-bottom: 0.25rem;
         }
 
-        .tracker-banner-text p {
-            font-size: 0.85rem;
-            color: var(--soft);
-        }
+        .tracker-banner-text p { font-size: 0.85rem; color: var(--soft); }
 
         .saved-count {
             background: var(--accent);
@@ -442,7 +373,6 @@
     </div>
 </header>
 
-<!-- Search Section -->
 <div class="search-section">
     <div class="search-inner">
         <h1 class="search-title">Passende Jobs finden</h1>
@@ -465,24 +395,20 @@
     </div>
 </div>
 
-<!-- Main Content -->
 <div class="main">
 
-    <!-- Tracker Banner -->
     <div class="tracker-banner" id="trackerBanner" style="display:none;">
         <div class="tracker-banner-text">
             <h3>Gespeicherte Jobs <span class="saved-count" id="savedCount">0</span></h3>
             <p>Exportiere deine gespeicherten Jobs als Excel-Datei mit Bewerbungs-Tracker</p>
         </div>
-        <button class="btn-outline" onclick="exportExcel()" id="exportBtn">📊 Excel exportieren</button>
+        <button class="btn-outline" onclick="exportExcel()">📊 Excel exportieren</button>
     </div>
 
-    <!-- Results Header -->
     <div class="results-header" id="resultsHeader" style="display:none;">
         <div class="results-count" id="resultsCount"></div>
     </div>
 
-    <!-- Jobs Container -->
     <div id="jobsContainer">
         <div class="state-box">
             <div class="state-icon">🔍</div>
@@ -491,7 +417,6 @@
         </div>
     </div>
 
-    <!-- Load More -->
     <div class="load-more-section" id="loadMoreSection" style="display:none;">
         <button class="btn-outline" onclick="loadMore()" id="loadMoreBtn">Mehr Jobs laden</button>
     </div>
@@ -499,16 +424,13 @@
 </div>
 
 <script>
-    // ========= STATE =========
     let allJobs = [];
     let savedJobs = [];
     let currentPage = 1;
     const pageSize = 12;
     let totalJobs = 0;
 
-    // ========= PRE-FILL FROM CV =========
     window.addEventListener('DOMContentLoaded', () => {
-        // Try to pre-fill from localStorage (set by cv.html)
         const savedProfile = localStorage.getItem('jobbruecke_profile');
         if (savedProfile) {
             try {
@@ -517,44 +439,31 @@
                 if (profile.city) document.getElementById('searchLocation').value = profile.city;
             } catch(e) {}
         }
-
-        // Load saved jobs
         const saved = localStorage.getItem('jobbruecke_saved_jobs');
         if (saved) {
-            try {
-                savedJobs = JSON.parse(saved);
-                updateTrackerBanner();
-            } catch(e) {}
+            try { savedJobs = JSON.parse(saved); updateTrackerBanner(); } catch(e) {}
         }
     });
 
-    // ========= SEARCH =========
     async function searchJobs() {
         const jobTitle = document.getElementById('searchJob').value.trim();
         const location = document.getElementById('searchLocation').value.trim();
         const radius = document.getElementById('searchRadius').value || 25;
-
-        if (!jobTitle) {
-            document.getElementById('searchJob').focus();
-            return;
-        }
-
+        if (!jobTitle) { document.getElementById('searchJob').focus(); return; }
         currentPage = 1;
         allJobs = [];
         showLoading();
-
         try {
-            const jobs = await fetchJobsFromBA(jobTitle, location, radius, 1);
-            allJobs = jobs.jobList || [];
-            totalJobs = jobs.total || 0;
-            renderJobs(allJobs, false);
+            const data = await fetchJobs(jobTitle, location, radius, 1);
+            allJobs = data.stellenangebote || [];
+            totalJobs = data.maxErgebnisse || 0;
+            renderJobs(false);
         } catch(err) {
             showError();
         }
     }
 
-    // ========= AGENTUR FÜR ARBEIT API =========
-   async function fetchJobsFromBA(what, where, radius, page) {
+    async function fetchJobs(what, where, radius, page) {
         const params = new URLSearchParams({
             was: what,
             wo: where || '',
@@ -562,168 +471,108 @@
             page: page,
             size: pageSize
         });
-
         const response = await fetch('/api/jobs?' + params.toString());
-
-        if (!response.ok) throw new Error('API error');
-        return await response.json();
-    }
-            }
-        );
-
         if (!response.ok) throw new Error('API error');
         return await response.json();
     }
 
-    // ========= LOAD MORE =========
     async function loadMore() {
         const jobTitle = document.getElementById('searchJob').value.trim();
         const location = document.getElementById('searchLocation').value.trim();
         const radius = document.getElementById('searchRadius').value || 25;
-
         currentPage++;
-        document.getElementById('loadMoreBtn').textContent = '⏳ Laden...';
-        document.getElementById('loadMoreBtn').disabled = true;
-
+        const btn = document.getElementById('loadMoreBtn');
+        btn.textContent = '⏳ Laden...';
+        btn.disabled = true;
         try {
-            const jobs = await fetchJobsFromBA(jobTitle, location, radius, currentPage);
-            const newJobs = jobs.jobList || [];
+            const data = await fetchJobs(jobTitle, location, radius, currentPage);
+            const newJobs = data.stellenangebote || [];
             allJobs = [...allJobs, ...newJobs];
             appendJobs(newJobs);
-        } catch(err) {
-            currentPage--;
-        }
-
-        document.getElementById('loadMoreBtn').textContent = 'Mehr Jobs laden';
-        document.getElementById('loadMoreBtn').disabled = false;
+        } catch(err) { currentPage--; }
+        btn.textContent = 'Mehr Jobs laden';
+        btn.disabled = false;
     }
 
-    // ========= RENDER =========
-    function renderJobs(jobs, append) {
+    function renderJobs(append) {
         const container = document.getElementById('jobsContainer');
         const resultsHeader = document.getElementById('resultsHeader');
         const resultsCount = document.getElementById('resultsCount');
         const loadMoreSection = document.getElementById('loadMoreSection');
 
-        if (jobs.length === 0) {
-            showEmpty();
-            return;
-        }
+        if (allJobs.length === 0) { showEmpty(); return; }
 
         resultsHeader.style.display = 'flex';
-        resultsCount.innerHTML = `<span>${totalJobs}</span> Stellen gefunden`;
+        resultsCount.innerHTML = '<span>' + totalJobs + '</span> Stellen gefunden';
 
         if (!append) {
-            container.innerHTML = `<div class="jobs-grid" id="jobsGrid"></div>`;
+            container.innerHTML = '<div class="jobs-grid" id="jobsGrid"></div>';
         }
 
-        appendJobs(jobs);
+        appendJobs(allJobs);
 
-        // Show load more if there are more results
-        if (allJobs.length < totalJobs) {
-            loadMoreSection.style.display = 'block';
-        } else {
-            loadMoreSection.style.display = 'none';
-        }
+        loadMoreSection.style.display = allJobs.length < totalJobs ? 'block' : 'none';
     }
 
     function appendJobs(jobs) {
         const grid = document.getElementById('jobsGrid');
         if (!grid) return;
-
-        jobs.forEach(job => {
-            const card = createJobCard(job);
-            grid.insertAdjacentHTML('beforeend', card);
-        });
+        jobs.forEach(job => grid.insertAdjacentHTML('beforeend', createJobCard(job)));
     }
 
     function createJobCard(job) {
         const title = job.titel || 'Stelle';
         const company = job.arbeitgeber || 'Unternehmen';
-        const location = job.arbeitsort?.ort || job.arbeitsort?.region || '';
-        const jobType = job.arbeitszeitModelle?.[0] || '';
-        const refNum = job.refnr || '';
-        const desc = job.kurzbeschreibung || '';
+        const location = (job.arbeitsort && job.arbeitsort.ort) ? job.arbeitsort.ort : '';
+        const refNum = (job.refnr || '').replace(/[^a-zA-Z0-9\-]/g, '');
+        const desc = job.beruf || '';
         const date = job.eintrittsdatum ? new Date(job.eintrittsdatum).toLocaleDateString('de-DE') : '';
-        const applyUrl = `https://www.arbeitsagentur.de/jobsuche/jobdetail/${refNum}`;
+        const applyUrl = job.externeUrl || ('https://www.arbeitsagentur.de/jobsuche/jobdetail/' + job.refnr);
         const logoLetter = company.charAt(0).toUpperCase();
-        const isSaved = savedJobs.some(j => j.refnr === refNum);
-
-        // Generate a subtle color based on company name
+        const isSaved = savedJobs.some(function(j) { return j.refnr === refNum; });
         const colors = ['#1e5f6a', '#1a3a5c', '#2d5f3f', '#8b3a3a', '#5c2e8f', '#b8862f'];
-        const colorIndex = company.charCodeAt(0) % colors.length;
-        const logoColor = colors[colorIndex];
+        const logoColor = colors[company.charCodeAt(0) % colors.length];
+        const safeTitle = title.replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+        const safeCompany = company.replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+        const safeLocation = location.replace(/'/g, '&apos;').replace(/"/g, '&quot;');
 
-        return `
-            <div class="job-card" id="card-${refNum}">
-                <div class="job-card-top">
-                    <div style="display:flex; gap:0.75rem; align-items:flex-start; flex:1;">
-                        <div class="job-company-logo" style="background:${logoColor}">${logoLetter}</div>
-                        <div>
-                            <div class="job-title">${title}</div>
-                            <div class="job-company">${company}</div>
-                        </div>
-                    </div>
-                    <span class="job-source-badge">BA</span>
-                </div>
-
-                <div class="job-meta">
-                    ${location ? `<span class="job-tag location">📍 ${location}</span>` : ''}
-                    ${jobType ? `<span class="job-tag type">${formatJobType(jobType)}</span>` : ''}
-                </div>
-
-                ${desc ? `<p class="job-desc">${desc}</p>` : ''}
-
-                <div class="job-card-footer">
-                    <span class="job-date">${date ? `Ab ${date}` : ''}</span>
-                    <div class="job-actions">
-                        <button class="btn-save ${isSaved ? 'saved' : ''}" onclick="toggleSave('${refNum}', '${escapeStr(title)}', '${escapeStr(company)}', '${escapeStr(location)}', '${applyUrl}')">
-                            ${isSaved ? '✓ Gespeichert' : '+ Speichern'}
-                        </button>
-                        <a href="${applyUrl}" target="_blank" class="btn-apply">Bewerben →</a>
-                    </div>
-                </div>
-            </div>
-        `;
+        return '<div class="job-card" id="card-' + refNum + '">' +
+            '<div class="job-card-top">' +
+                '<div style="display:flex;gap:0.75rem;align-items:flex-start;flex:1;">' +
+                    '<div class="job-company-logo" style="background:' + logoColor + '">' + logoLetter + '</div>' +
+                    '<div>' +
+                        '<div class="job-title">' + title + '</div>' +
+                        '<div class="job-company">' + company + '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<span class="job-source-badge">BA</span>' +
+            '</div>' +
+            '<div class="job-meta">' +
+                (location ? '<span class="job-tag location">📍 ' + location + '</span>' : '') +
+            '</div>' +
+            (desc ? '<p class="job-desc">' + desc + '</p>' : '') +
+            '<div class="job-card-footer">' +
+                '<span class="job-date">' + (date ? 'Ab ' + date : '') + '</span>' +
+                '<div class="job-actions">' +
+                    '<button class="btn-save ' + (isSaved ? 'saved' : '') + '" onclick="toggleSave(\'' + refNum + '\',\'' + safeTitle + '\',\'' + safeCompany + '\',\'' + safeLocation + '\',\'' + applyUrl + '\')">' +
+                        (isSaved ? '✓ Gespeichert' : '+ Speichern') +
+                    '</button>' +
+                    '<a href="' + applyUrl + '" target="_blank" class="btn-apply">Bewerben →</a>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
     }
 
-    function formatJobType(type) {
-        const map = {
-            'VOLLZEIT': 'Vollzeit',
-            'TEILZEIT': 'Teilzeit',
-            'HOMEOFFICE': 'Homeoffice',
-            'MINIJOB': 'Minijob',
-            'AUSBILDUNG': 'Ausbildung',
-            'PRAKTIKUM': 'Praktikum'
-        };
-        return map[type] || type;
-    }
-
-    function escapeStr(str) {
-        return (str || '').replace(/'/g, "\\'").replace(/"/g, '\\"');
-    }
-
-    // ========= SAVE / TRACKER =========
     function toggleSave(refnr, title, company, location, applyUrl) {
-        const existing = savedJobs.findIndex(j => j.refnr === refnr);
-        const btn = document.querySelector(`#card-${refnr} .btn-save`);
-
+        const existing = savedJobs.findIndex(function(j) { return j.refnr === refnr; });
+        const btn = document.querySelector('#card-' + refnr + ' .btn-save');
         if (existing >= 0) {
             savedJobs.splice(existing, 1);
             if (btn) { btn.textContent = '+ Speichern'; btn.classList.remove('saved'); }
         } else {
-            savedJobs.push({
-                refnr,
-                title,
-                company,
-                location,
-                applyUrl,
-                savedAt: new Date().toLocaleDateString('de-DE'),
-                status: 'Nicht beworben'
-            });
+            savedJobs.push({ refnr, title, company, location, applyUrl, savedAt: new Date().toLocaleDateString('de-DE'), status: 'Nicht beworben' });
             if (btn) { btn.textContent = '✓ Gespeichert'; btn.classList.add('saved'); }
         }
-
         localStorage.setItem('jobbruecke_saved_jobs', JSON.stringify(savedJobs));
         updateTrackerBanner();
     }
@@ -731,89 +580,50 @@
     function updateTrackerBanner() {
         const banner = document.getElementById('trackerBanner');
         const count = document.getElementById('savedCount');
-        if (savedJobs.length > 0) {
-            banner.style.display = 'flex';
-            count.textContent = savedJobs.length;
-        } else {
-            banner.style.display = 'none';
-        }
+        banner.style.display = savedJobs.length > 0 ? 'flex' : 'none';
+        count.textContent = savedJobs.length;
     }
 
-    // ========= EXCEL EXPORT =========
     function exportExcel() {
         if (savedJobs.length === 0) return;
-
-        const data = savedJobs.map(job => ({
-            'Position': job.title,
-            'Unternehmen': job.company,
-            'Ort': job.location,
-            'Bewerbungslink': job.applyUrl,
-            'Gespeichert am': job.savedAt,
-            'Status': job.status,
-            'Notizen': ''
-        }));
-
+        const data = savedJobs.map(function(job) {
+            return {
+                'Position': job.title,
+                'Unternehmen': job.company,
+                'Ort': job.location,
+                'Bewerbungslink': job.applyUrl,
+                'Gespeichert am': job.savedAt,
+                'Status': job.status,
+                'Notizen': ''
+            };
+        });
         const ws = XLSX.utils.json_to_sheet(data);
-
-        // Column widths
-        ws['!cols'] = [
-            { wch: 40 }, // Position
-            { wch: 30 }, // Unternehmen
-            { wch: 20 }, // Ort
-            { wch: 60 }, // Link
-            { wch: 15 }, // Datum
-            { wch: 20 }, // Status
-            { wch: 30 }  // Notizen
-        ];
-
+        ws['!cols'] = [{ wch: 40 }, { wch: 30 }, { wch: 20 }, { wch: 60 }, { wch: 15 }, { wch: 20 }, { wch: 30 }];
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Bewerbungen');
-
         const date = new Date().toLocaleDateString('de-DE').replace(/\./g, '-');
-        XLSX.utils.writeFile(wb, `Jobbrücke_Bewerbungen_${date}.xlsx`);
+        XLSX.utils.writeFile(wb, 'Jobbruecke_Bewerbungen_' + date + '.xlsx');
     }
 
-    // ========= STATES =========
     function showLoading() {
         document.getElementById('resultsHeader').style.display = 'none';
         document.getElementById('loadMoreSection').style.display = 'none';
-        document.getElementById('jobsContainer').innerHTML = `
-            <div class="state-box">
-                <div class="spinner"></div>
-                <div class="state-title">Jobs werden geladen...</div>
-                <p class="state-desc">Suche in der Datenbank der Agentur für Arbeit</p>
-            </div>
-        `;
+        document.getElementById('jobsContainer').innerHTML = '<div class="state-box"><div class="spinner"></div><div class="state-title">Jobs werden geladen...</div><p class="state-desc">Suche in der Datenbank der Agentur für Arbeit</p></div>';
     }
 
     function showEmpty() {
         document.getElementById('resultsHeader').style.display = 'none';
         document.getElementById('loadMoreSection').style.display = 'none';
-        document.getElementById('jobsContainer').innerHTML = `
-            <div class="state-box">
-                <div class="state-icon">😕</div>
-                <div class="state-title">Keine Stellen gefunden</div>
-                <p class="state-desc">Versuche einen anderen Suchbegriff<br>oder erweitere den Umkreis</p>
-            </div>
-        `;
+        document.getElementById('jobsContainer').innerHTML = '<div class="state-box"><div class="state-icon">😕</div><div class="state-title">Keine Stellen gefunden</div><p class="state-desc">Versuche einen anderen Suchbegriff oder erweitere den Umkreis</p></div>';
     }
 
     function showError() {
         document.getElementById('resultsHeader').style.display = 'none';
         document.getElementById('loadMoreSection').style.display = 'none';
-        document.getElementById('jobsContainer').innerHTML = `
-            <div class="state-box">
-                <div class="state-icon">⚠️</div>
-                <div class="state-title">Verbindungsfehler</div>
-                <p class="state-desc">Die Agentur für Arbeit ist momentan nicht erreichbar.<br>Bitte versuche es in einem Moment erneut.</p>
-            </div>
-        `;
+        document.getElementById('jobsContainer').innerHTML = '<div class="state-box"><div class="state-icon">⚠️</div><div class="state-title">Verbindungsfehler</div><p class="state-desc">Bitte versuche es in einem Moment erneut.</p></div>';
     }
 
-    // ========= ENTER KEY =========
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') searchJobs();
-    });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Enter') searchJobs(); });
 </script>
 
 </body>
