@@ -54,7 +54,10 @@
             font-size: 0.9rem;
             font-weight: 500;
             padding: 0.5rem 1rem;
+            transition: color 0.2s;
         }
+
+        .btn-ghost:hover { color: var(--accent); }
 
         .btn-primary {
             background: var(--accent);
@@ -262,7 +265,46 @@
 
         .photo-upload-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* ========= PREVIEW PANEL ========= */
+        /* Next step banner */
+        .next-step-banner {
+            background: linear-gradient(135deg, var(--accent), #145055);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .next-step-text {
+            color: white;
+            font-size: 0.88rem;
+            line-height: 1.4;
+        }
+
+        .next-step-text strong {
+            display: block;
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .btn-next {
+            background: white;
+            color: var(--accent);
+            padding: 0.6rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .btn-next:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+        /* Preview panel */
         .preview-panel {
             padding: 2rem;
             background: var(--bg);
@@ -273,7 +315,7 @@
             align-items: flex-start;
         }
 
-        /* ========= CV ========= */
+        /* CV */
         .cv {
             width: 210mm;
             min-height: 297mm;
@@ -291,7 +333,6 @@
             background: var(--accent);
             color: white;
             padding: 40px 28px;
-            position: relative;
             transition: background 0.3s;
         }
 
@@ -343,28 +384,16 @@
             font-weight: 300;
         }
 
-        .cv-qual-item {
-            font-size: 0.78rem;
-            margin-bottom: 10px;
-            color: rgba(255,255,255,0.92);
-            line-height: 1.4;
-        }
-
+        .cv-qual-item { font-size: 0.78rem; margin-bottom: 10px; line-height: 1.4; }
         .cv-qual-item:last-child { margin-bottom: 0; }
         .cv-qual-name { font-weight: 500; color: white; display: block; margin-bottom: 1px; }
         .cv-qual-issuer { font-size: 0.72rem; color: rgba(255,255,255,0.6); font-weight: 300; }
 
-        .cv-lang-item {
-            font-size: 0.8rem;
-            margin-bottom: 8px;
-            color: rgba(255,255,255,0.92);
-            line-height: 1.4;
-        }
-
+        .cv-lang-item { font-size: 0.8rem; margin-bottom: 8px; line-height: 1.4; }
         .cv-lang-name { font-weight: 500; color: white; display: inline-block; }
         .cv-lang-level { color: rgba(255,255,255,0.65); font-weight: 300; font-size: 0.74rem; display: block; margin-top: 1px; }
 
-        .cv-main { padding: 40px 40px; }
+        .cv-main { padding: 40px; }
 
         .cv-header { margin-bottom: 32px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
 
@@ -373,22 +402,13 @@
             font-size: 2.5rem;
             font-weight: 600;
             line-height: 1.05;
-            color: var(--ink);
             margin-bottom: 6px;
             letter-spacing: -0.01em;
         }
 
         .cv-name .first { display: block; color: var(--accent); font-weight: 500; }
         .cv-name .last { display: block; color: var(--ink); font-weight: 700; }
-
-        .cv-job-title {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin-top: 4px;
-            margin-bottom: 14px;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-        }
+        .cv-job-title { font-size: 0.9rem; color: var(--muted); margin-top: 4px; font-weight: 400; }
 
         .cv-section { margin-bottom: 24px; }
 
@@ -412,7 +432,6 @@
             color: var(--muted);
             margin-bottom: 3px;
             font-weight: 500;
-            letter-spacing: 0.02em;
         }
 
         .cv-exp-role { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
@@ -430,13 +449,7 @@
             margin-bottom: 3px;
         }
 
-        .cv-exp-bullets li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: 700;
-        }
+        .cv-exp-bullets li::before { content: '•'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
 
         .cv-edu-degree { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
         .cv-edu-school { font-size: 0.82rem; color: var(--soft); }
@@ -454,19 +467,29 @@
     <a href="index.html" class="logo">Jobbrücke</a>
     <div class="topbar-actions">
         <a href="index.html" class="btn-ghost">← Zurück</a>
+        <a href="jobs.html" class="btn-ghost">Jobs finden →</a>
         <button class="btn-primary" onclick="downloadPDF()" id="pdfBtn">📄 PDF herunterladen</button>
     </div>
 </header>
 
 <div class="container">
 
-    <!-- FORM PANEL -->
     <div class="form-panel">
         <div class="panel-header">
             <h1 class="panel-title">Dein Lebenslauf</h1>
             <p class="panel-subtitle">Fülle aus — der Lebenslauf rechts aktualisiert sich live.</p>
         </div>
 
+        <!-- Next step banner -->
+        <div class="next-step-banner">
+            <div class="next-step-text">
+                <strong>Nächster Schritt: Jobs finden</strong>
+                Sobald dein Lebenslauf fertig ist, suchen wir passende Stellen für dich.
+            </div>
+            <a href="jobs.html" class="btn-next">Jobs finden →</a>
+        </div>
+
+        <!-- Design -->
         <div class="section">
             <div class="section-title">Design</div>
             <div class="form-group">
@@ -484,6 +507,7 @@
             </div>
         </div>
 
+        <!-- Personal Info -->
         <div class="section">
             <div class="section-title">Persönliche Daten</div>
             <div class="photo-upload">
@@ -505,7 +529,7 @@
             </div>
             <div class="form-group">
                 <label>Berufsbezeichnung</label>
-                <input type="text" id="jobTitle" placeholder="z.B. Projektingenieur" oninput="updatePreview()">
+                <input type="text" id="jobTitle" placeholder="z.B. Projektingenieur" oninput="updatePreview(); saveProfile()">
             </div>
             <div class="form-row">
                 <div class="form-group">
@@ -520,7 +544,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Adresse</label>
-                    <input type="text" id="address" placeholder="Straße, PLZ Stadt" oninput="updatePreview()">
+                    <input type="text" id="address" placeholder="Straße, PLZ Stadt" oninput="updatePreview(); saveProfile()">
                 </div>
                 <div class="form-group">
                     <label>Geburtsdatum</label>
@@ -529,32 +553,37 @@
             </div>
         </div>
 
+        <!-- Experience -->
         <div class="section">
             <div class="section-title">Berufserfahrung</div>
             <div id="experienceList"></div>
             <button class="btn-add" onclick="addExperience()">+ Berufserfahrung hinzufügen</button>
         </div>
 
+        <!-- Education -->
         <div class="section">
             <div class="section-title">Studium & Abschlüsse</div>
             <div id="educationList"></div>
             <button class="btn-add" onclick="addEducation()">+ Abschluss hinzufügen</button>
         </div>
 
+        <!-- Expertise -->
         <div class="section">
             <div class="section-title">Expertise</div>
             <div class="form-group">
                 <label>Kompetenzen & Kenntnisse (kommagetrennt)</label>
-                <textarea id="expertise" placeholder="Microsoft Office, Autodesk Fusion 360, Python, MTM-Analyse, Prozessoptimierung, Projektleitung, Interkulturelle Kompetenz" oninput="updatePreview()"></textarea>
+                <textarea id="expertise" placeholder="Microsoft Office, Autodesk Fusion 360, Python, MTM-Analyse, Prozessoptimierung, Projektleitung" oninput="updatePreview()"></textarea>
             </div>
         </div>
 
+        <!-- Languages -->
         <div class="section">
             <div class="section-title">Sprachen</div>
             <div id="languagesList"></div>
             <button class="btn-add" onclick="addLanguage()">+ Sprache hinzufügen</button>
         </div>
 
+        <!-- Qualifications -->
         <div class="section">
             <div class="section-title">Qualifikationen</div>
             <div id="qualificationsList"></div>
@@ -580,7 +609,7 @@
 
                 <div class="cv-side-section" id="cvExpertiseSection">
                     <div class="cv-side-label">Expertise</div>
-                    <div class="cv-expertise-text" id="cvExpertise">Microsoft Office, Autodesk Fusion 360, Python</div>
+                    <div class="cv-expertise-text" id="cvExpertise">Microsoft Office, Autodesk Fusion 360</div>
                 </div>
 
                 <div class="cv-side-section">
@@ -637,225 +666,204 @@
 
 <script>
     // ========= COLOR PICKER =========
-    document.querySelectorAll('.color-swatch').forEach(sw => {
-        sw.addEventListener('click', () => {
-            document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.color-swatch').forEach(function(sw) {
+        sw.addEventListener('click', function() {
+            document.querySelectorAll('.color-swatch').forEach(function(s) { s.classList.remove('active'); });
             sw.classList.add('active');
-            const color = sw.dataset.color;
-            document.documentElement.style.setProperty('--accent', color);
-            currentAccentColor = color;
+            document.documentElement.style.setProperty('--accent', sw.dataset.color);
+            currentAccentColor = sw.dataset.color;
         });
     });
 
     // ========= PHOTO =========
-    let photoDataUrl = null;
+    var photoDataUrl = null;
+    var currentAccentColor = '#1e5f6a';
 
     document.getElementById('photoInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
+        var file = e.target.files[0];
         if (file) {
-            const reader = new FileReader();
+            var reader = new FileReader();
             reader.onload = function(ev) {
                 photoDataUrl = ev.target.result;
-                document.getElementById('photoPreview').style.backgroundImage = `url(${photoDataUrl})`;
+                document.getElementById('photoPreview').style.backgroundImage = 'url(' + photoDataUrl + ')';
                 document.getElementById('photoPreview').textContent = '';
-                document.getElementById('cvPhoto').style.backgroundImage = `url(${photoDataUrl})`;
+                document.getElementById('cvPhoto').style.backgroundImage = 'url(' + photoDataUrl + ')';
                 document.getElementById('cvPhoto').textContent = '';
             };
             reader.readAsDataURL(file);
         }
     });
 
+    // ========= SAVE PROFILE =========
+    function saveProfile() {
+        var jobTitle = document.getElementById('jobTitle').value;
+        var address = document.getElementById('address').value;
+        var city = '';
+        if (address) {
+            var parts = address.split(',');
+            if (parts.length > 1) {
+                city = parts[parts.length - 1].trim().replace(/^\d{5}\s*/, '').trim();
+            } else {
+                city = address.trim();
+            }
+        }
+        var profile = { jobTitle: jobTitle, city: city };
+        localStorage.setItem('jobbruecke_profile', JSON.stringify(profile));
+    }
+
     // ========= DATA =========
-    let experiences = [];
-    let educations = [];
-    let languages = [];
-    let qualifications = [];
-    let currentAccentColor = '#1e5f6a';
+    var experiences = [];
+    var educations = [];
+    var languages = [];
+    var qualifications = [];
 
     // ========= EXPERIENCE =========
     function addExperience() {
-        const id = Date.now();
-        experiences.push({ id, from: '', to: '', role: '', company: '', bullets: '' });
+        var id = Date.now();
+        experiences.push({ id: id, from: '', to: '', role: '', company: '', bullets: '' });
         renderExperienceForm();
         updatePreview();
     }
 
     function removeExperience(id) {
-        experiences = experiences.filter(e => e.id !== id);
+        experiences = experiences.filter(function(e) { return e.id !== id; });
         renderExperienceForm();
         updatePreview();
     }
 
     function updateExperience(id, field, value) {
-        const exp = experiences.find(e => e.id === id);
+        var exp = experiences.find(function(e) { return e.id === id; });
         if (exp) { exp[field] = value; updatePreview(); }
     }
 
     function renderExperienceForm() {
-        document.getElementById('experienceList').innerHTML = experiences.map((exp, i) => `
-            <div class="dynamic-item">
-                <div class="dynamic-item-header">
-                    <div class="dynamic-item-title">Stelle ${i + 1}</div>
-                    <button class="btn-remove" onclick="removeExperience(${exp.id})">✕</button>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Von</label>
-                        <input type="text" placeholder="MM/JJJJ" value="${exp.from}" oninput="updateExperience(${exp.id}, 'from', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>Bis</label>
-                        <input type="text" placeholder="Aktuell" value="${exp.to}" oninput="updateExperience(${exp.id}, 'to', this.value)">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Position</label>
-                    <input type="text" placeholder="z.B. Projektingenieur" value="${exp.role}" oninput="updateExperience(${exp.id}, 'role', this.value)">
-                </div>
-                <div class="form-group">
-                    <label>Unternehmen | Ort</label>
-                    <input type="text" placeholder="z.B. Mercedes-Benz AG | Stuttgart" value="${exp.company}" oninput="updateExperience(${exp.id}, 'company', this.value)">
-                </div>
-                <div class="form-group">
-                    <label>Aufgaben (eine pro Zeile)</label>
-                    <textarea placeholder="Prozess- und Fertigungsplanung&#10;Durchführung MTM-Analyse" oninput="updateExperience(${exp.id}, 'bullets', this.value)">${exp.bullets}</textarea>
-                </div>
-            </div>
-        `).join('');
+        document.getElementById('experienceList').innerHTML = experiences.map(function(exp, i) {
+            return '<div class="dynamic-item">' +
+                '<div class="dynamic-item-header">' +
+                    '<div class="dynamic-item-title">Stelle ' + (i + 1) + '</div>' +
+                    '<button class="btn-remove" onclick="removeExperience(' + exp.id + ')">✕</button>' +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="form-group"><label>Von</label><input type="text" placeholder="MM/JJJJ" value="' + exp.from + '" oninput="updateExperience(' + exp.id + ', \'from\', this.value)"></div>' +
+                    '<div class="form-group"><label>Bis</label><input type="text" placeholder="Aktuell" value="' + exp.to + '" oninput="updateExperience(' + exp.id + ', \'to\', this.value)"></div>' +
+                '</div>' +
+                '<div class="form-group"><label>Position</label><input type="text" placeholder="z.B. Projektingenieur" value="' + exp.role + '" oninput="updateExperience(' + exp.id + ', \'role\', this.value)"></div>' +
+                '<div class="form-group"><label>Unternehmen | Ort</label><input type="text" placeholder="z.B. Mercedes-Benz AG | Stuttgart" value="' + exp.company + '" oninput="updateExperience(' + exp.id + ', \'company\', this.value)"></div>' +
+                '<div class="form-group"><label>Aufgaben (eine pro Zeile)</label><textarea placeholder="Prozess- und Fertigungsplanung&#10;Durchführung MTM-Analyse" oninput="updateExperience(' + exp.id + ', \'bullets\', this.value)">' + exp.bullets + '</textarea></div>' +
+            '</div>';
+        }).join('');
     }
 
     // ========= EDUCATION =========
     function addEducation() {
-        const id = Date.now();
-        educations.push({ id, year: '', degree: '', school: '' });
+        var id = Date.now();
+        educations.push({ id: id, year: '', degree: '', school: '' });
         renderEducationForm();
         updatePreview();
     }
 
     function removeEducation(id) {
-        educations = educations.filter(e => e.id !== id);
+        educations = educations.filter(function(e) { return e.id !== id; });
         renderEducationForm();
         updatePreview();
     }
 
     function updateEducation(id, field, value) {
-        const edu = educations.find(e => e.id === id);
+        var edu = educations.find(function(e) { return e.id === id; });
         if (edu) { edu[field] = value; updatePreview(); }
     }
 
     function renderEducationForm() {
-        document.getElementById('educationList').innerHTML = educations.map((edu, i) => `
-            <div class="dynamic-item">
-                <div class="dynamic-item-header">
-                    <div class="dynamic-item-title">Abschluss ${i + 1}</div>
-                    <button class="btn-remove" onclick="removeEducation(${edu.id})">✕</button>
-                </div>
-                <div class="form-group">
-                    <label>Jahr</label>
-                    <input type="text" placeholder="z.B. 2021" value="${edu.year}" oninput="updateEducation(${edu.id}, 'year', this.value)">
-                </div>
-                <div class="form-group">
-                    <label>Abschluss</label>
-                    <input type="text" placeholder="z.B. Bachelor Maschinenbau" value="${edu.degree}" oninput="updateEducation(${edu.id}, 'degree', this.value)">
-                </div>
-                <div class="form-group">
-                    <label>Institution | Ort</label>
-                    <input type="text" placeholder="z.B. Westfälische Hochschule | Gelsenkirchen" value="${edu.school}" oninput="updateEducation(${edu.id}, 'school', this.value)">
-                </div>
-            </div>
-        `).join('');
+        document.getElementById('educationList').innerHTML = educations.map(function(edu, i) {
+            return '<div class="dynamic-item">' +
+                '<div class="dynamic-item-header">' +
+                    '<div class="dynamic-item-title">Abschluss ' + (i + 1) + '</div>' +
+                    '<button class="btn-remove" onclick="removeEducation(' + edu.id + ')">✕</button>' +
+                '</div>' +
+                '<div class="form-group"><label>Jahr</label><input type="text" placeholder="z.B. 2021" value="' + edu.year + '" oninput="updateEducation(' + edu.id + ', \'year\', this.value)"></div>' +
+                '<div class="form-group"><label>Abschluss</label><input type="text" placeholder="z.B. Bachelor Maschinenbau" value="' + edu.degree + '" oninput="updateEducation(' + edu.id + ', \'degree\', this.value)"></div>' +
+                '<div class="form-group"><label>Institution | Ort</label><input type="text" placeholder="z.B. Westfälische Hochschule | Gelsenkirchen" value="' + edu.school + '" oninput="updateEducation(' + edu.id + ', \'school\', this.value)"></div>' +
+            '</div>';
+        }).join('');
     }
 
     // ========= LANGUAGES =========
     function addLanguage() {
-        const id = Date.now();
-        languages.push({ id, name: '', level: 'C1 - Fließend' });
+        var id = Date.now();
+        languages.push({ id: id, name: '', level: 'C1 - Fließend' });
         renderLanguageForm();
         updatePreview();
     }
 
     function removeLanguage(id) {
-        languages = languages.filter(l => l.id !== id);
+        languages = languages.filter(function(l) { return l.id !== id; });
         renderLanguageForm();
         updatePreview();
     }
 
     function updateLanguage(id, field, value) {
-        const lang = languages.find(l => l.id === id);
+        var lang = languages.find(function(l) { return l.id === id; });
         if (lang) { lang[field] = value; updatePreview(); }
     }
 
     function renderLanguageForm() {
-        document.getElementById('languagesList').innerHTML = languages.map((lang, i) => `
-            <div class="dynamic-item">
-                <div class="dynamic-item-header">
-                    <div class="dynamic-item-title">Sprache ${i + 1}</div>
-                    <button class="btn-remove" onclick="removeLanguage(${lang.id})">✕</button>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Sprache</label>
-                        <input type="text" placeholder="z.B. Deutsch" value="${lang.name}" oninput="updateLanguage(${lang.id}, 'name', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>Niveau</label>
-                        <select onchange="updateLanguage(${lang.id}, 'level', this.value)">
-                            <option ${lang.level==='Muttersprache'?'selected':''}>Muttersprache</option>
-                            <option ${lang.level==='C2 - Experte'?'selected':''}>C2 - Experte</option>
-                            <option ${lang.level==='C1 - Fließend'?'selected':''}>C1 - Fließend</option>
-                            <option ${lang.level==='B2 - Fortgeschritten'?'selected':''}>B2 - Fortgeschritten</option>
-                            <option ${lang.level==='B1 - Mittelstufe'?'selected':''}>B1 - Mittelstufe</option>
-                            <option ${lang.level==='A2 - Grundkenntnisse'?'selected':''}>A2 - Grundkenntnisse</option>
-                            <option ${lang.level==='A1 - Anfänger'?'selected':''}>A1 - Anfänger</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        `).join('');
+        document.getElementById('languagesList').innerHTML = languages.map(function(lang, i) {
+            return '<div class="dynamic-item">' +
+                '<div class="dynamic-item-header">' +
+                    '<div class="dynamic-item-title">Sprache ' + (i + 1) + '</div>' +
+                    '<button class="btn-remove" onclick="removeLanguage(' + lang.id + ')">✕</button>' +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="form-group"><label>Sprache</label><input type="text" placeholder="z.B. Deutsch" value="' + lang.name + '" oninput="updateLanguage(' + lang.id + ', \'name\', this.value)"></div>' +
+                    '<div class="form-group"><label>Niveau</label>' +
+                        '<select onchange="updateLanguage(' + lang.id + ', \'level\', this.value)">' +
+                            '<option ' + (lang.level === 'Muttersprache' ? 'selected' : '') + '>Muttersprache</option>' +
+                            '<option ' + (lang.level === 'C2 - Experte' ? 'selected' : '') + '>C2 - Experte</option>' +
+                            '<option ' + (lang.level === 'C1 - Fließend' ? 'selected' : '') + '>C1 - Fließend</option>' +
+                            '<option ' + (lang.level === 'B2 - Fortgeschritten' ? 'selected' : '') + '>B2 - Fortgeschritten</option>' +
+                            '<option ' + (lang.level === 'B1 - Mittelstufe' ? 'selected' : '') + '>B1 - Mittelstufe</option>' +
+                            '<option ' + (lang.level === 'A2 - Grundkenntnisse' ? 'selected' : '') + '>A2 - Grundkenntnisse</option>' +
+                            '<option ' + (lang.level === 'A1 - Anfänger' ? 'selected' : '') + '>A1 - Anfänger</option>' +
+                        '</select>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }).join('');
     }
 
     // ========= QUALIFICATIONS =========
     function addQualification() {
-        const id = Date.now();
-        qualifications.push({ id, name: '', issuer: '', year: '' });
+        var id = Date.now();
+        qualifications.push({ id: id, name: '', issuer: '', year: '' });
         renderQualificationForm();
         updatePreview();
     }
 
     function removeQualification(id) {
-        qualifications = qualifications.filter(q => q.id !== id);
+        qualifications = qualifications.filter(function(q) { return q.id !== id; });
         renderQualificationForm();
         updatePreview();
     }
 
     function updateQualification(id, field, value) {
-        const qual = qualifications.find(q => q.id === id);
+        var qual = qualifications.find(function(q) { return q.id === id; });
         if (qual) { qual[field] = value; updatePreview(); }
     }
 
     function renderQualificationForm() {
-        document.getElementById('qualificationsList').innerHTML = qualifications.map((qual, i) => `
-            <div class="dynamic-item">
-                <div class="dynamic-item-header">
-                    <div class="dynamic-item-title">Qualifikation ${i + 1}</div>
-                    <button class="btn-remove" onclick="removeQualification(${qual.id})">✕</button>
-                </div>
-                <div class="form-group">
-                    <label>Bezeichnung</label>
-                    <input type="text" placeholder="z.B. MTM-1" value="${qual.name}" oninput="updateQualification(${qual.id}, 'name', this.value)">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Aussteller (optional)</label>
-                        <input type="text" placeholder="z.B. REFA" value="${qual.issuer}" oninput="updateQualification(${qual.id}, 'issuer', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>Jahr (optional)</label>
-                        <input type="text" placeholder="z.B. 2023" value="${qual.year}" oninput="updateQualification(${qual.id}, 'year', this.value)">
-                    </div>
-                </div>
-            </div>
-        `).join('');
+        document.getElementById('qualificationsList').innerHTML = qualifications.map(function(qual, i) {
+            return '<div class="dynamic-item">' +
+                '<div class="dynamic-item-header">' +
+                    '<div class="dynamic-item-title">Qualifikation ' + (i + 1) + '</div>' +
+                    '<button class="btn-remove" onclick="removeQualification(' + qual.id + ')">✕</button>' +
+                '</div>' +
+                '<div class="form-group"><label>Bezeichnung</label><input type="text" placeholder="z.B. MTM-1" value="' + qual.name + '" oninput="updateQualification(' + qual.id + ', \'name\', this.value)"></div>' +
+                '<div class="form-row">' +
+                    '<div class="form-group"><label>Aussteller (optional)</label><input type="text" placeholder="z.B. REFA" value="' + qual.issuer + '" oninput="updateQualification(' + qual.id + ', \'issuer\', this.value)"></div>' +
+                    '<div class="form-group"><label>Jahr (optional)</label><input type="text" placeholder="z.B. 2023" value="' + qual.year + '" oninput="updateQualification(' + qual.id + ', \'year\', this.value)"></div>' +
+                '</div>' +
+            '</div>';
+        }).join('');
     }
 
     // ========= UPDATE PREVIEW =========
@@ -863,98 +871,73 @@
         document.getElementById('cvFirstName').textContent = document.getElementById('firstName').value || 'Vorname';
         document.getElementById('cvLastName').textContent = document.getElementById('lastName').value || 'Nachname';
 
-        const jobTitle = document.getElementById('jobTitle').value;
-        const cvJobTitle = document.getElementById('cvJobTitle');
+        var jobTitle = document.getElementById('jobTitle').value;
+        var cvJobTitle = document.getElementById('cvJobTitle');
         cvJobTitle.textContent = jobTitle;
         cvJobTitle.style.display = jobTitle ? 'block' : 'none';
 
         document.getElementById('cvSidePhone').textContent = document.getElementById('phone').value || '+49 000 000 000';
         document.getElementById('cvSideEmail').textContent = document.getElementById('email').value || 'email@example.de';
         document.getElementById('cvSideAddress').textContent = document.getElementById('address').value || 'Adresse';
-        const bday = document.getElementById('birthdate').value;
-        document.getElementById('cvSideBirthdate').textContent = bday ? `geb. ${bday}` : '';
+        var bday = document.getElementById('birthdate').value;
+        document.getElementById('cvSideBirthdate').textContent = bday ? 'geb. ' + bday : '';
 
-        // Expertise
-        const expertise = document.getElementById('expertise').value;
-        const expertiseSection = document.getElementById('cvExpertiseSection');
-        expertiseSection.style.display = expertise.trim() ? 'block' : 'none';
+        var expertise = document.getElementById('expertise').value;
+        document.getElementById('cvExpertiseSection').style.display = expertise.trim() ? 'block' : 'none';
         document.getElementById('cvExpertise').textContent = expertise;
 
-        // Languages
-        const langsHtml = languages.filter(l => l.name.trim()).map(l => `
-            <div class="cv-lang-item">
-                <span class="cv-lang-name">${l.name}</span>
-                <span class="cv-lang-level">${l.level}</span>
-            </div>
-        `).join('');
+        var langsHtml = languages.filter(function(l) { return l.name.trim(); }).map(function(l) {
+            return '<div class="cv-lang-item"><span class="cv-lang-name">' + l.name + '</span><span class="cv-lang-level">' + l.level + '</span></div>';
+        }).join('');
         document.getElementById('cvLanguages').innerHTML = langsHtml || '<div class="cv-lang-item"><span class="cv-lang-name">Deutsch</span><span class="cv-lang-level">Muttersprache</span></div>';
 
-        // Qualifications
-        const qualsHtml = qualifications.filter(q => q.name.trim()).map(q => {
-            const issuerPart = [q.issuer, q.year].filter(x => x.trim()).join(' · ');
-            return `<div class="cv-qual-item"><span class="cv-qual-name">${q.name}</span>${issuerPart ? `<span class="cv-qual-issuer">${issuerPart}</span>` : ''}</div>`;
+        var qualsHtml = qualifications.filter(function(q) { return q.name.trim(); }).map(function(q) {
+            var issuerPart = [q.issuer, q.year].filter(function(x) { return x.trim(); }).join(' · ');
+            return '<div class="cv-qual-item"><span class="cv-qual-name">' + q.name + '</span>' + (issuerPart ? '<span class="cv-qual-issuer">' + issuerPart + '</span>' : '') + '</div>';
         }).join('');
-        const qualSection = document.getElementById('cvQualSection');
-        qualSection.style.display = qualsHtml ? 'block' : 'none';
+        document.getElementById('cvQualSection').style.display = qualsHtml ? 'block' : 'none';
         document.getElementById('cvQualifications').innerHTML = qualsHtml;
 
-        // Experience
-        const expHtml = experiences.map(exp => {
-            const period = (exp.from || exp.to) ? `${exp.from}${exp.to ? ' – ' + exp.to : ''}` : 'Zeitraum';
-            const bullets = exp.bullets.split('\n').filter(b => b.trim());
-            return `
-                <div class="cv-exp-item">
-                    <div class="cv-exp-period">${period}</div>
-                    <div class="cv-exp-company"><span class="cv-exp-role">${exp.role || 'Position'}</span>${exp.company ? ' <span class="sep">|</span> ' + exp.company : ''}</div>
-                    ${bullets.length ? `<ul class="cv-exp-bullets">${bullets.map(b => `<li>${b.trim()}</li>`).join('')}</ul>` : ''}
-                </div>`;
+        var expHtml = experiences.map(function(exp) {
+            var period = (exp.from || exp.to) ? (exp.from + (exp.to ? ' – ' + exp.to : '')) : 'Zeitraum';
+            var bullets = exp.bullets.split('\n').filter(function(b) { return b.trim(); });
+            return '<div class="cv-exp-item">' +
+                '<div class="cv-exp-period">' + period + '</div>' +
+                '<div class="cv-exp-company"><span class="cv-exp-role">' + (exp.role || 'Position') + '</span>' + (exp.company ? ' <span class="sep">|</span> ' + exp.company : '') + '</div>' +
+                (bullets.length ? '<ul class="cv-exp-bullets">' + bullets.map(function(b) { return '<li>' + b.trim() + '</li>'; }).join('') + '</ul>' : '') +
+            '</div>';
         }).join('');
         document.getElementById('cvExperience').innerHTML = expHtml || '<div class="cv-exp-item"><div class="cv-exp-period">Zeitraum</div><div class="cv-exp-company"><span class="cv-exp-role">Position</span> <span class="sep">|</span> Unternehmen</div></div>';
 
-        // Education
-        const eduHtml = educations.map(edu => `
-            <div class="cv-edu-item">
-                <div class="cv-edu-period">${edu.year || 'Jahr'}</div>
-                <div class="cv-edu-degree">${edu.degree || 'Abschluss'}</div>
-                <div class="cv-edu-school">${edu.school || 'Institution'}</div>
-            </div>`).join('');
+        var eduHtml = educations.map(function(edu) {
+            return '<div class="cv-edu-item"><div class="cv-edu-period">' + (edu.year || 'Jahr') + '</div><div class="cv-edu-degree">' + (edu.degree || 'Abschluss') + '</div><div class="cv-edu-school">' + (edu.school || 'Institution') + '</div></div>';
+        }).join('');
         document.getElementById('cvEducation').innerHTML = eduHtml || '<div class="cv-edu-item"><div class="cv-edu-period">Jahr</div><div class="cv-edu-degree">Abschluss</div><div class="cv-edu-school">Institution</div></div>';
     }
 
     // ========= PDF DOWNLOAD =========
     function downloadPDF() {
-        const btn = document.getElementById('pdfBtn');
+        var btn = document.getElementById('pdfBtn');
         btn.textContent = '⏳ Wird erstellt...';
         btn.disabled = true;
 
-        const cv = document.getElementById('cvPreview');
-
-        // Reset scale for clean capture
+        var cv = document.getElementById('cvPreview');
         cv.style.transform = 'none';
         cv.style.marginBottom = '0';
 
-        const firstName = document.getElementById('firstName').value || 'Lebenslauf';
-        const lastName = document.getElementById('lastName').value || '';
-        const filename = `${firstName}_${lastName}_Lebenslauf.pdf`.replace(/\s+/g, '_');
+        var firstName = document.getElementById('firstName').value || 'Lebenslauf';
+        var lastName = document.getElementById('lastName').value || '';
+        var filename = (firstName + '_' + lastName + '_Lebenslauf.pdf').replace(/\s+/g, '_');
 
-        const options = {
+        var options = {
             margin: 0,
             filename: filename,
             image: { type: 'jpeg', quality: 1 },
-            html2canvas: {
-                scale: 2,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: '#ffffff'
-            },
-            jsPDF: {
-                unit: 'mm',
-                format: 'a4',
-                orientation: 'portrait'
-            }
+            html2canvas: { scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#ffffff' },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
-        html2pdf().set(options).from(cv).save().then(() => {
+        html2pdf().set(options).from(cv).save().then(function() {
             cv.style.transform = 'scale(0.75)';
             cv.style.marginBottom = '-80mm';
             btn.textContent = '📄 PDF herunterladen';
@@ -963,7 +946,7 @@
     }
 
     // ========= INIT =========
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', function() {
         addExperience();
         addEducation();
         addLanguage();
