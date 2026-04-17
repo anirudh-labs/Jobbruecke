@@ -688,7 +688,7 @@
         XLSX.utils.book_append_sheet(wb, ws, 'Bewerbungen');
 
         var date = new Date().toLocaleDateString('de-DE').replace(/\./g, '-');
-        XLSX.utils.writeFile(wb, 'Jobbruecke_Bewerbungen_' + date + '.xlsx');
+        XLSX.writeFile(wb, 'Jobbruecke_Bewerbungen_' + date + '.xlsx');
     }
 
     // ========= STATES =========
