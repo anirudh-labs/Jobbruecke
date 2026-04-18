@@ -1,521 +1,224 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobbrücke — Kostenlose Bewerbungshilfe für Deutschland</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --accent: #1e5f6a;
-            --ink: #1a1a1a;
-            --soft: #4a4a4a;
-            --muted: #8a8a8a;
-            --line: #e5e5e5;
-            --paper: #ffffff;
-            --bg: #f8f6f3;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--ink);
-            line-height: 1.6;
-        }
-
-        .header {
-            background: rgba(248, 246, 243, 0.95);
-            border-bottom: 1px solid var(--line);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(8px);
-        }
-
-        .nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Fraunces', serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--soft);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover { color: var(--accent); }
-
-        .cta-button {
-            background: var(--accent);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 100px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .cta-button:hover {
-            background: #145055;
-            transform: translateY(-1px);
-        }
-
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 5rem 2rem;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.4rem 1rem;
-            border-radius: 100px;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .hero-title {
-            font-family: 'Fraunces', serif;
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.05;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-title .highlight {
-            color: var(--accent);
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--soft);
-            margin: 0 auto 2.5rem;
-            font-weight: 300;
-            line-height: 1.6;
-            max-width: 650px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary:hover {
-            background: #145055;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(30, 95, 106, 0.3);
-        }
-
-        .btn-secondary {
-            color: var(--soft);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 1px solid transparent;
-            transition: all 0.2s;
-            padding: 1rem 0;
-        }
-
-        .btn-secondary:hover {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-
-        .features {
-            background: var(--paper);
-            padding: 6rem 2rem;
-        }
-
-        .features-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-badge {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-family: 'Fraunces', serif;
-            font-size: 2.75rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--ink);
-            letter-spacing: -0.02em;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--soft);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-        }
-
-        .feature-item {
-            padding: 1rem;
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            background: #eaf4f5;
-        }
-
-        .feature-item h3 {
-            font-family: 'Fraunces', serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--ink);
-        }
-
-        .feature-item p {
-            color: var(--soft);
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        .how-it-works {
-            padding: 6rem 2rem;
-            background: var(--bg);
-        }
-
-        .steps {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .step {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.2s;
-        }
-
-        .step:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-            border-color: var(--accent);
-        }
-
-        .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            font-family: 'Fraunces', serif;
-        }
-
-        .step h3 {
-            font-family: 'Fraunces', serif;
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .step p {
-            color: var(--soft);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .cta {
-            background: var(--accent);
-            padding: 5rem 2rem;
-            text-align: center;
-            color: white;
-        }
-
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta h2 {
-            font-family: 'Fraunces', serif;
-            font-size: 2.75rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
-
-        .cta p {
-            font-size: 1.15rem;
-            margin-bottom: 2.5rem;
-            color: rgba(255,255,255,0.85);
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-white {
-            background: white;
-            color: var(--accent);
-            padding: 1rem 2.25rem;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.2s;
-            display: inline-block;
-        }
-
-        .btn-white:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-        }
-
-        .footer {
-            background: var(--paper);
-            border-top: 1px solid var(--line);
-            padding: 2.5rem 2rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .footer-text {
-            color: var(--muted);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .footer-links a {
-            color: var(--soft);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover { color: var(--accent); }
-
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .features-grid { grid-template-columns: 1fr; }
-            .steps { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .section-title, .cta h2 { font-size: 2rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jobbrücke — Kostenlose Bewerbungshilfe für Deutschland</title>
+<meta name="description" content="Kostenloser Lebenslauf-Generator, Jobsuche und KI-Anschreiben für Deutschland. Keine Anmeldung, 100% privat.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S62DPG2L17"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S62DPG2L17');</script>
+<style>
+:root{--accent:#1e5f6a;--ink:#1a1a1a;--soft:#4a4a4a;--muted:#8a8a8a;--line:#e5e5e5;--paper:#fff;--bg:#f8f6f3;--premium:#b8862f;--premium-bg:#fef3c7;--beta:#d97706;--beta-bg:#fef3c7}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+a{color:inherit;text-decoration:none}
+.topbar{background:var(--paper);border-bottom:1px solid var(--line);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.logo-wrap{display:flex;align-items:center;gap:.6rem}
+.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--accent)}
+.beta-badge{font-size:.62rem;font-weight:700;padding:.2rem .5rem;border-radius:100px;background:var(--beta-bg);color:var(--beta);letter-spacing:.1em;text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--soft);font-weight:500;font-size:.92rem;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.btn-primary{background:var(--accent);color:#fff;padding:.7rem 1.5rem;border-radius:100px;font-weight:600;font-size:.92rem;transition:all .2s;display:inline-block}
+.btn-primary:hover{background:#145055;transform:translateY(-1px)}
+.hero{padding:5rem 2rem;text-align:center;max-width:900px;margin:0 auto}
+.hero-badge{display:inline-block;background:var(--accent);color:#fff;padding:.45rem 1.1rem;border-radius:100px;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-title{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero-title .accent{color:var(--accent);font-style:italic;font-weight:500}
+.hero-sub{font-size:1.15rem;color:var(--soft);max-width:580px;margin:0 auto 2.5rem;line-height:1.6}
+.hero-ctas{display:flex;gap:1rem;justify-content:center;align-items:center;flex-wrap:wrap}
+.btn-hero{background:var(--accent);color:#fff;padding:1rem 2rem;border-radius:100px;font-weight:700;font-size:1rem;transition:all .2s}
+.btn-hero:hover{background:#145055;transform:translateY(-2px);box-shadow:0 10px 30px rgba(30,95,106,.25)}
+.btn-link{color:var(--soft);font-weight:500;transition:color .2s}
+.btn-link:hover{color:var(--accent)}
+.section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+.section-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);text-align:center;margin-bottom:1rem}
+.section-title{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:700;text-align:center;letter-spacing:-.02em;margin-bottom:1rem}
+.section-sub{text-align:center;color:var(--soft);max-width:560px;margin:0 auto 3.5rem;font-size:1.02rem;line-height:1.6}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.feature-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:2rem;transition:all .2s}
+.feature-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.feature-icon{font-size:1.8rem;margin-bottom:1rem}
+.feature-name{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;margin-bottom:.5rem}
+.feature-desc{font-size:.9rem;color:var(--soft);line-height:1.6}
+.coming-soon{background:linear-gradient(135deg,var(--premium-bg),#fef8e4);border:1px solid #fde68a;border-radius:20px;padding:2.5rem;margin-top:3rem}
+.coming-soon-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+.coming-soon-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--premium);background:#fff;padding:.3rem .75rem;border-radius:100px;display:inline-block}
+.coming-soon-title{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--ink)}
+.coming-soon-list{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
+.coming-soon-item{font-size:.92rem;color:#6b5a2e;padding-left:1.5rem;position:relative;line-height:1.5}
+.coming-soon-item::before{content:'✦';position:absolute;left:0;color:var(--premium);font-weight:700}
+.coming-soon-note{font-size:.85rem;color:#8b7a3e;margin-top:1rem;font-style:italic}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.step{text-align:center}
+.step-num{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:800;color:var(--accent);opacity:.25;margin-bottom:.5rem}
+.step-title{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;margin-bottom:.5rem}
+.step-desc{font-size:.88rem;color:var(--soft);line-height:1.5}
+.cta-section{background:var(--accent);color:#fff;padding:4rem 2rem;text-align:center}
+.cta-title{font-family:'Fraunces',serif;font-size:2rem;font-weight:700;margin-bottom:1rem}
+.cta-sub{color:rgba(255,255,255,.85);max-width:520px;margin:0 auto 2rem;line-height:1.6}
+.btn-cta{background:#fff;color:var(--accent);padding:1rem 2rem;border-radius:100px;font-weight:700;font-size:1rem;transition:all .2s;display:inline-block}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.15)}
+footer{background:var(--paper);border-top:1px solid var(--line);padding:3rem 2rem 2rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2rem}
+.footer-brand .logo{margin-bottom:.5rem;display:inline-block}
+.footer-tag{font-size:.88rem;color:var(--soft);line-height:1.6;max-width:320px}
+.footer-col h4{font-family:'Fraunces',serif;font-size:.88rem;font-weight:600;margin-bottom:.85rem;color:var(--ink)}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{font-size:.88rem;color:var(--soft);transition:color .2s}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{border-top:1px solid var(--line);padding-top:1.5rem;font-size:.78rem;color:var(--muted);text-align:center}
+@media (max-width:768px){.hero-title{font-size:2.25rem}.features-grid{grid-template-columns:1fr}.how-steps{grid-template-columns:repeat(2,1fr)}.coming-soon-list{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}.nav-links{display:none}}
+</style>
 </head>
 <body>
 
-<header class="header">
-    <nav class="nav">
-        <a href="#" class="logo">Jobbrücke</a>
- <ul class="nav-links">
-            <li><a href="cv.html">Lebenslauf</a></li>
-            <li><a href="jobs.html">Jobs finden</a></li>
-            <li><a href="anschreiben.html">Anschreiben</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how">So geht's</a></li>
-        </ul>
-<a href="cv.html" class="cta-button">Jetzt starten</a>        
-    </nav>
+<header class="topbar">
+  <div class="logo-wrap">
+    <a href="index.html" class="logo">Jobbrücke</a>
+    <span class="beta-badge">Beta</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="cv.html">Lebenslauf</a></li>
+    <li><a href="jobs.html">Jobs finden</a></li>
+    <li><a href="anschreiben.html">Anschreiben</a></li>
+    <li><a href="#features">Features</a></li>
+  </ul>
+  <a href="cv.html" class="btn-primary">Jetzt starten</a>
 </header>
 
-<main>
-    <section class="hero">
-        <div class="hero-badge">Kostenlos · Open Source · Keine Anmeldung</div>
-        <h1 class="hero-title">Der schnellste Weg zum <span class="highlight">neuen Job</span></h1>
-        <p class="hero-subtitle">Erstelle einen professionellen Lebenslauf, finde passende Stellen und generiere individuelle Anschreiben — alles kostenlos und in wenigen Minuten.</p>
-        <div class="hero-buttons">
-            <a href="#start" class="btn-primary">Kostenlos starten →</a>
-            <a href="#how" class="btn-secondary">So funktioniert's</a>
-        </div>
-    </section>
+<section class="hero">
+  <div class="hero-badge">Kostenlos · Open Source · Keine Anmeldung</div>
+  <h1 class="hero-title">Der schnellste Weg zum <span class="accent">neuen Job</span></h1>
+  <p class="hero-sub">Erstelle einen professionellen Lebenslauf, finde passende Stellen und generiere individuelle Anschreiben — alles kostenlos und in wenigen Minuten.</p>
+  <div class="hero-ctas">
+    <a href="cv.html" class="btn-hero">Kostenlos starten →</a>
+    <a href="#how" class="btn-link">So funktioniert's</a>
+  </div>
+</section>
 
-    <section id="features" class="features">
-        <div class="features-content">
-            <div class="section-header">
-                <div class="section-badge">Features</div>
-                <h2 class="section-title">Alles was du brauchst</h2>
-                <p class="section-subtitle">Von der Bewerbung bis zum Vorstellungsgespräch — ein kompletter Werkzeugkasten für deine Jobsuche.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">📝</div>
-                    <h3>Lebenslauf-Generator</h3>
-                    <p>Moderner, individueller Lebenslauf mit Foto und eigener Farbwahl. Sofort als PDF herunterladen.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Smarte Jobsuche</h3>
-                    <p>Passende Stellen von der Agentur für Arbeit und führenden Arbeitgebern, automatisch auf dich zugeschnitten.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">✉️</div>
-                    <h3>KI-Anschreiben</h3>
-                    <p>Individuelle Anschreiben für jede Position, geschrieben von KI und angepasst an das jeweilige Unternehmen.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">📊</div>
-                    <h3>Bewerbungs-Tracker</h3>
-                    <p>Behalte den Überblick über deine Bewerbungen — vom ersten Kontakt bis zur Zusage.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🇩🇪</div>
-                    <h3>Für Deutschland gemacht</h3>
-                    <p>Speziell für den deutschen Arbeitsmarkt entwickelt — mit deutschen Bewerbungsstandards und Integrationen.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🔒</div>
-                    <h3>100% Privat</h3>
-                    <p>Keine Anmeldung, keine Datenspeicherung. Deine Informationen bleiben in deinem Browser.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="how" class="how-it-works">
-        <div class="features-content">
-            <div class="section-header">
-                <div class="section-badge">So einfach geht's</div>
-                <h2 class="section-title">In 4 Schritten zum Erfolg</h2>
-                <p class="section-subtitle">Vom ersten Profil bis zur fertigen Bewerbung in wenigen Minuten.</p>
-            </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Profil erstellen</h3>
-                    <p>Gib deine Qualifikationen und Berufserfahrung ein. Schnell, einfach, ohne Anmeldung.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Lebenslauf generieren</h3>
-                    <p>Wähle Farbe und Layout, lade dein Foto hoch und erhalte sofort einen professionellen PDF-Lebenslauf.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Passende Jobs finden</h3>
-                    <p>Automatisch werden passende Stellenanzeigen angezeigt — entweder von der Agentur für Arbeit oder von Top-Arbeitgebern.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Bewerben</h3>
-                    <p>Erstelle mit einem Klick ein maßgeschneidertes Anschreiben und bewirb dich direkt beim Arbeitgeber.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="start" class="cta">
-        <div class="cta-content">
-            <h2>Bereit für deinen nächsten Schritt?</h2>
-            <p>Starte jetzt kostenlos und erstelle deine erste professionelle Bewerbung in nur wenigen Minuten.</p>
-            <a href="cv.html" class="btn-white">Jetzt kostenlos starten →</a>
-        </div>
-    </section>
-</main>
-
-<footer class="footer">
-    <div class="footer-content">
-        <p class="footer-text">Jobbrücke — Ein kostenloses Open Source Projekt für Deutschland</p>
-        <ul class="footer-links">
-            <li><a href="cv.html">Lebenslauf erstellen</a></li>
-            <li><a href="jobs.html">Jobs finden</a></li>
-            <li><a href="https://github.com/anirudh-labs/Jobbruecke" target="_blank">GitHub</a></li>
-            <li><a href="https://ko-fi.com" target="_blank">☕ Spenden</a></li>
-        </ul>
+<section class="section" id="features">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Alles was du brauchst</h2>
+  <p class="section-sub">Von der Bewerbung bis zum Vorstellungsgespräch — ein kompletter Werkzeugkasten für deine Jobsuche.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+      <div class="feature-name">Lebenslauf-Generator</div>
+      <div class="feature-desc">Moderner Lebenslauf mit Foto-Editor und professionellem Hintergrund. Sofort als PDF.</div>
     </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <div class="feature-name">Verifizierte Jobs</div>
+      <div class="feature-desc">Direkt aus der Datenbank der Agentur für Arbeit. Keine Ghost-Listings, keine Weiterleitungen.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✉️</div>
+      <div class="feature-name">KI-Anschreiben</div>
+      <div class="feature-desc">Individuelle Anschreiben für jede Position — direkt aus der Stellenanzeige generiert.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✦</div>
+      <div class="feature-name">CV-Analyse</div>
+      <div class="feature-desc">KI bewertet deinen Lebenslauf und gibt konkrete Verbesserungsvorschläge — wie ein Coach.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <div class="feature-name">Job-Match-Score</div>
+      <div class="feature-desc">Sofort sehen, wie gut du zu einer Stelle passt — mit konkreter Begründung.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-name">Bewerbungs-Tracker</div>
+      <div class="feature-desc">Alle Bewerbungen an einem Ort — Status, Notizen, Excel-Export. Alles automatisch.</div>
+    </div>
+  </div>
+
+  <div class="coming-soon">
+    <div class="coming-soon-head">
+      <div>
+        <span class="coming-soon-label">Coming Soon</span>
+        <div class="coming-soon-title" style="margin-top:.75rem;">Premium-Features</div>
+      </div>
+    </div>
+    <div class="coming-soon-list">
+      <div class="coming-soon-item">KI-generiertes professionelles Bewerbungsfoto</div>
+      <div class="coming-soon-item">Erweiterte Bewerbungspakete mit Interview-Prep</div>
+      <div class="coming-soon-item">Nachfass-E-Mails automatisch generiert</div>
+      <div class="coming-soon-item">Gehalts-Verhandlungstipps für deine Stelle</div>
+    </div>
+    <p class="coming-soon-note">Jobbrücke bleibt im Kern immer kostenlos. Premium finanziert die KI-Features für alle.</p>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="section-label">So einfach geht's</div>
+  <h2 class="section-title">In 4 Schritten zum Erfolg</h2>
+  <p class="section-sub">Vom ersten Profil bis zur fertigen Bewerbung in wenigen Minuten.</p>
+  <div class="how-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Profil erstellen</div>
+      <div class="step-desc">Gib deine Qualifikationen und Berufserfahrung ein. Ohne Anmeldung.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Lebenslauf generieren</div>
+      <div class="step-desc">Wähle Farbe und Layout, lade ein Foto hoch — fertiger PDF-Lebenslauf.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Passende Jobs finden</div>
+      <div class="step-desc">Stellenanzeigen werden automatisch nach deinem Profil angezeigt.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Bewerben</div>
+      <div class="step-desc">Ein-Klick Anschreiben generieren und direkt beim Arbeitgeber bewerben.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2 class="cta-title">Bereit für deinen nächsten Schritt?</h2>
+  <p class="cta-sub">Starte jetzt kostenlos und erstelle deine erste professionelle Bewerbung in nur wenigen Minuten.</p>
+  <a href="cv.html" class="btn-cta">Jetzt kostenlos starten →</a>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Jobbrücke</a>
+        <p class="footer-tag">Kostenloses Open-Source-Projekt für Jobsuchende in Deutschland.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Produkt</h4>
+        <ul>
+          <li><a href="cv.html">Lebenslauf</a></li>
+          <li><a href="jobs.html">Jobs finden</a></li>
+          <li><a href="anschreiben.html">Anschreiben</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Projekt</h4>
+        <ul>
+          <li><a href="https://github.com/anirudh-labs/Jobbruecke" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:jobbruecke.de@gmail.com">Feedback</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Jobbrücke · Beta-Phase</div>
+  </div>
 </footer>
 
 </body>
