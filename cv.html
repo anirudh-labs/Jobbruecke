@@ -139,6 +139,10 @@ input[type=range].zoom-slider{flex:1;accent-color:var(--accent)}
 .cv-edu-degree{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:2px}
 .cv-edu-school{font-size:.82rem;color:var(--soft)}
 @media (max-width:1200px){.preview-panel{display:none}.container{grid-template-columns:1fr}.form-panel{max-height:none;border-right:none}}
+@media (max-width:768px){.topbar{padding:.75rem 1rem;gap:.5rem}.topbar-actions{gap:.4rem}.topbar-actions .btn-ghost{display:none}.topbar-actions .btn-primary{display:none}.form-panel{padding:1rem;padding-bottom:6rem}.mobile-pdf-fab{display:flex !important}}
+.mobile-pdf-fab{display:none;position:fixed;bottom:1rem;left:1rem;right:1rem;background:var(--accent);color:#fff;padding:1rem;border-radius:14px;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;border:none;cursor:pointer;align-items:center;justify-content:center;gap:.5rem;box-shadow:0 8px 24px rgba(30,95,106,.4);z-index:200}
+.mobile-pdf-fab:active{transform:scale(.98)}
+.mobile-pdf-fab:disabled{opacity:.7}
 </style>
 </head>
 <body>
@@ -345,7 +349,7 @@ input[type=range].zoom-slider{flex:1;accent-color:var(--accent)}
     </div>
   </div>
 </div>
-
+<button class="mobile-pdf-fab" onclick="downloadPDF()" id="pdfBtnMobile">📄 PDF herunterladen</button>
 <script>
 document.querySelectorAll('.color-swatch').forEach(function(sw){sw.addEventListener('click',function(){document.querySelectorAll('.color-swatch').forEach(function(s){s.classList.remove('active');});sw.classList.add('active');document.documentElement.style.setProperty('--accent',sw.dataset.color);});});
 
