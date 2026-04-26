@@ -106,7 +106,8 @@ input[type=range].zoom-slider{flex:1;accent-color:var(--accent)}
 .preview-panel{padding:2rem;background:var(--bg);overflow-y:auto;max-height:calc(100vh - 70px);display:flex;justify-content:center;align-items:flex-start}
 .cv{width:210mm;min-height:297mm;background:#fff;display:grid;grid-template-columns:75mm 1fr;box-shadow:0 8px 48px rgba(0,0,0,.12);font-family:'Inter',sans-serif;transform:scale(.75);transform-origin:top center;margin-bottom:-80mm}
 .cv-sidebar{background:var(--accent);color:#fff;padding:40px 28px;transition:background .3s}
-.cv-photo{width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.1);background-size:cover;background-position:center;margin:0 auto 32px;border:3px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:2.5rem;color:rgba(255,255,255,.6);font-weight:500}
+.cv-photo{width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.1);margin:0 auto 32px;border:3px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:2.5rem;color:rgba(255,255,255,.6);font-weight:500;overflow:hidden;position:relative}
+.cv-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .cv-side-section{margin-bottom:32px}
 .cv-side-section:last-child{margin-bottom:0}
 .cv-side-label{font-family:'Fraunces',serif;font-size:.75rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.95)}
@@ -394,11 +395,12 @@ function renderPhoto(){
   var x=(size-w)*offsetX;
   var y=(size-h)*offsetY;
   ctx.drawImage(originalImage,x,y,w,h);
-  photoDataUrl=canvas.toDataURL('image/jpeg',.92);
+  photoDataUrl=canvas.toDataURL('image/jpeg',.85);
   document.getElementById('photoPreview').style.backgroundImage='url('+photoDataUrl+')';
   document.getElementById('photoPreview').textContent='';
-  document.getElementById('cvPhoto').style.backgroundImage='url('+photoDataUrl+')';
-  document.getElementById('cvPhoto').textContent='';
+  var cvPhotoEl=document.getElementById('cvPhoto');
+  cvPhotoEl.innerHTML='<img src="'+photoDataUrl+'" alt="Profilfoto">';
+  cvPhotoEl.style.backgroundImage='none';
 }
 
 document.getElementById('zoomSlider').addEventListener('input',function(e){zoom=e.target.value/100;renderPhoto();});
